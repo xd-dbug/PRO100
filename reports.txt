@@ -1,8 +1,0 @@
-[Report Type: NEAR_MISS
-ID: 1
-File: 6.24.25 Damian Swiney - ID 9546
-Associate Name: Victroia
-Description: almost got hit by a tugger
-Action Taken: none
-Status: incomplete
-]
