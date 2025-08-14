@@ -6,6 +6,9 @@ import csc180.damian.swiney.workplace_incident_report_system.views.*;
 import csc180.damian.swiney.workplace_incident_report_system.model.Report;
 import csc180.damian.swiney.workplace_incident_report_system.views.Console;
 
+import csc180.damian.swiney.workplace_incident_report_system.model.Report;
+import csc180.damian.swiney.workplace_incident_report_system.views.Console;
+import csc180.damian.swiney.workplace_incident_report_system.views.View;
 import java.io.*;
 import java.util.Scanner;
 
