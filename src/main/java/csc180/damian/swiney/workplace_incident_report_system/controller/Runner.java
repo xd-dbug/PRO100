@@ -1,19 +1,14 @@
 package csc180.damian.swiney.workplace_incident_report_system.controller;
 
 
+import model.Report;
+import views.Console;
+import views.View;
+import java.io.*;
+import java.util.Scanner;
 
-import csc180.damian.swiney.workplace_incident_report_system.model.Report;
-import csc180.damian.swiney.workplace_incident_report_system.views.Console;
-import csc180.damian.swiney.workplace_incident_report_system.views.View;
-
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Runner {
     List<Report> reports = new ArrayList<>();

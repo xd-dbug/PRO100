@@ -1,7 +1,7 @@
-package model.typeOfReports;
+package csc180.damian.swiney.workplace_incident_report_system.model.typeOfReports;
 
 import model.Report;
-import model.TypeOfReport;
+import csc180.damian.swiney.workplace_incident_report_system.model.TypeOfReport;
 
 public class Other extends Report {
     public Other(String fileName, String associateName, String actionTaken, String description, String status) {

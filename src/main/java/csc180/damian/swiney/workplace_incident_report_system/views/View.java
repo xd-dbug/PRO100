@@ -1,12 +1,10 @@
 package csc180.damian.swiney.workplace_incident_report_system.views;
 
-
-
-import csc180.damian.swiney.workplace_incident_report_system.model.Report;
-import csc180.damian.swiney.workplace_incident_report_system.model.typeOfReports.Injury;
-import csc180.damian.swiney.workplace_incident_report_system.model.typeOfReports.NearMiss;
-import csc180.damian.swiney.workplace_incident_report_system.model.typeOfReports.ProductDamage;
-import csc180.damian.swiney.workplace_incident_report_system.model.typeOfReports.PropertyDamage;
+import model.Report;
+import model.typeOfReports.Injury;
+import model.typeOfReports.NearMiss;
+import model.typeOfReports.ProductDamage;
+import model.typeOfReports.PropertyDamage;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package csc180.damian.swiney.workplace_incident_report_system.model.typeOfReports;
 
-
-import csc180.damian.swiney.workplace_incident_report_system.model.Report;
+import model.Report;
 import csc180.damian.swiney.workplace_incident_report_system.model.TypeOfReport;
 
 public class Injury extends Report {
