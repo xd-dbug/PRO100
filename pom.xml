@@ -38,6 +38,25 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>17.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>17.0.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>11.2.1</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -61,7 +80,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                csc180.damian.swiney.workplace_incident_report_system/csc180.damian.swiney.workplace_incident_report_system.HelloApplication
+                                csc180.damian.swiney.workplace_incident_report_system/csc180.damian.swiney.workplace_incident_report_system.WIRMSApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
