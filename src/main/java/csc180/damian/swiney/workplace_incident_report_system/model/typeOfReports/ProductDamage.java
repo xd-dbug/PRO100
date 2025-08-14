@@ -1,6 +1,7 @@
 package csc180.damian.swiney.workplace_incident_report_system.model.typeOfReports;
 
-import model.Report;
+
+import csc180.damian.swiney.workplace_incident_report_system.model.Report;
 
 public class ProductDamage extends Report {
     private int damage;

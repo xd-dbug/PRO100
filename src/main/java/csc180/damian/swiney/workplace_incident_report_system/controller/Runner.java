@@ -1,9 +1,11 @@
 package csc180.damian.swiney.workplace_incident_report_system.controller;
 
 
-import model.Report;
-import views.Console;
-import views.View;
+import csc180.damian.swiney.workplace_incident_report_system.model.Employee;
+import csc180.damian.swiney.workplace_incident_report_system.views.*;
+import csc180.damian.swiney.workplace_incident_report_system.model.Report;
+import csc180.damian.swiney.workplace_incident_report_system.views.Console;
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -12,6 +14,7 @@ import java.util.List;
 
 public class Runner {
     List<Report> reports = new ArrayList<>();
+    List<Employee> employees = new ArrayList<>();
     View view = new View(reports);
 
     public void run(){
@@ -29,8 +32,10 @@ public class Runner {
                         3. Find report by ID
                         4. Update status in report
                         5. Save report to file
-                        6. Load File (DOES NOT WORK)
-                        7. Exit
+                        6. Add employee
+                        7. remove employee
+                        8. Load File (DOES NOT WORK)
+                        9. Exit
                         """);
                 switch (choice) {
                     case 1:
@@ -39,6 +44,7 @@ public class Runner {
                                 2. NearMiss
                                 3. ProductDamage
                                 4. PropertyDamage
+                                5. Other
                                 """);
                         addReport(makeReport(reportChoice));
                         break;
@@ -58,9 +64,15 @@ public class Runner {
                         } else {
                             break;
                         }
-                    case 6:
+                        case 6:
+                            employees.add(addEmployee());
+                            break;
+                            case 7:
+                                int id = Console.getIntInput("Enter ID to remove: ");
+                                removeEmployee(id);
+                    case 8:
                         break;
-                    case 7:
+                    case 9:
                         running = false;
                 }
 
@@ -92,6 +104,14 @@ public class Runner {
         return view.generateReport(choice);
     }
 
+    private Employee addEmployee(){
+        return view.addEmployee();
+    }
+
+    private void removeEmployee(int id){
+        employees.removeIf(employee -> id == employee.getEmployeeId());
+    }
+
     private void writeToFile(String content, File file){
         try{
             FileWriter writer = new FileWriter(file);
@@ -102,7 +122,6 @@ public class Runner {
             e.printStackTrace();
         }
     }
-    //region
     private String readFromFile(File file){
         try{
             Scanner scanner = new Scanner(file);
@@ -114,6 +133,5 @@ public class Runner {
         }
         return null;
     }
-    //endregion
 
 }

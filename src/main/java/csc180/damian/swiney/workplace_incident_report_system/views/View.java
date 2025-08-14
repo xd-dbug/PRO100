@@ -1,15 +1,14 @@
 package csc180.damian.swiney.workplace_incident_report_system.views;
 
-import model.Report;
-import model.typeOfReports.Injury;
-import model.typeOfReports.NearMiss;
-import model.typeOfReports.ProductDamage;
-import model.typeOfReports.PropertyDamage;
+import csc180.damian.swiney.workplace_incident_report_system.model.Employee;
+import csc180.damian.swiney.workplace_incident_report_system.model.Report;
+import csc180.damian.swiney.workplace_incident_report_system.model.typeOfReports.*;
 
 import java.util.List;
 
 public class View {
     private List<Report> reports;
+    private List<Employee> employees;
 
     public View(List<Report> reports) {
         this.reports = reports;
@@ -53,6 +52,9 @@ public class View {
             case 4:
                 int propertyDamage = Console.getIntInput("Enter Property Damage: ");
                 return new PropertyDamage(fileName, associateName, description, actionTaken, status, propertyDamage);
+
+            case 5:
+                return new Other(fileName, associateName, actionTaken, description, status);
         }
         return null;
     }
@@ -66,6 +68,16 @@ public class View {
             }
         }
     }
+
+    public Employee addEmployee(){
+        int id = Console.getIntInput("Enter Employee ID: ");
+        String firstName = Console.getStringInput("Enter Employee First Name: ");
+        String lastName = Console.getStringInput("Enter Employee Last Name: ");
+        return new Employee(id, firstName, lastName);
+
+    }
+
+
 
 
 }

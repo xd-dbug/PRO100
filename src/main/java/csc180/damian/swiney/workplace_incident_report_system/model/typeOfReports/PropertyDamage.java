@@ -1,6 +1,6 @@
 package csc180.damian.swiney.workplace_incident_report_system.model.typeOfReports;
 
-import model.Report;
+import csc180.damian.swiney.workplace_incident_report_system.model.Report;
 import csc180.damian.swiney.workplace_incident_report_system.model.TypeOfReport;
 
 public class PropertyDamage extends Report {
