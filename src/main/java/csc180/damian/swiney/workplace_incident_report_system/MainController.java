@@ -5,7 +5,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,7 +31,19 @@ public class MainController implements Initializable {
 
     }
 
+    @FXML
+    public void onPlusClicked() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddItemView.fxml"));
+        Parent root = loader.load();
 
+        Stage owner = (Stage) contentPane.getScene().getWindow();
+        Stage dialog = new Stage();
+        dialog.setTitle("Add Item");
+        dialog.initOwner(owner);
+        dialog.initModality(Modality.WINDOW_MODAL);
+        dialog.setScene(new Scene(root, 320, 140));
+        dialog.showAndWait();
+    }
 
     private void loadPage(String pageName) {
         try {
