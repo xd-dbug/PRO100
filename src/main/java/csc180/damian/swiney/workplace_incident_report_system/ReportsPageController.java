@@ -12,6 +12,8 @@ import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.sql.Date;
+
 public class ReportsPageController {
     @FXML
     public Label ReportsPaneTitle;
@@ -25,6 +27,8 @@ public class ReportsPageController {
     public TableColumn<Report, TypeOfReport> incidentTypeColumn;
     @FXML
     public TableColumn<Report, Integer> employeeIDColumn;
+    @FXML
+    public TableColumn<Report, Date> dateColumn;
     @FXML
     public TableColumn<Report, String> descriptionColumn;
     @FXML
