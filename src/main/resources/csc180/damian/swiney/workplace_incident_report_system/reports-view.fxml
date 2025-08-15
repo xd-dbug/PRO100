@@ -18,10 +18,10 @@
     </stylesheets>
 
     <top>
+        <Label fx:id="ReportsPaneTitle" styleClass="pageTitleLabel">Incident Reports</Label>
     </top>
 
     <left>
-        <Label fx:id="ReportsPaneTitle" styleClass="pageTitleLabel">Incident Reports</Label>
     </left>
 
     <right>

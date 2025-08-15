@@ -14,6 +14,8 @@
 
 <?import java.net.URL?>
 
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" prefHeight="600.0" prefWidth="700.0" styleClass="pane"
             fx:controller="csc180.damian.swiney.workplace_incident_report_system.EmployeesPageController">
     <stylesheets>
@@ -21,10 +23,11 @@
     </stylesheets>
 
     <top>
+        <Label fx:id="EmployeePaneTitle" styleClass="pageTitleLabel">Employees</Label>
     </top>
 
     <left>
-        <Label fx:id="EmployeePaneTitle" styleClass="pageTitleLabel">Employees</Label>
+
     </left>
 
     <right>
@@ -36,6 +39,15 @@
             <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
             </padding>
+
+            <TableView fx:id="employeeTable" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="272.0">
+                <columns>
+                    <TableColumn fx:id="idColumn" prefWidth="90.0" text="EmployeeID" />
+                    <TableColumn fx:id="firstNameColumn" prefWidth="90.0" text="First Name" />
+                    <TableColumn fx:id="lastNameColumn" prefWidth="90.0" text="Last Name" />
+                    <TableColumn fx:id="departmentColumn" prefWidth="90.0" text="Department" />
+                </columns>
+            </TableView>
 
 
         </VBox>

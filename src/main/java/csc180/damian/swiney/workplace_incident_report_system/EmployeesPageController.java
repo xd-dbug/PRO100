@@ -1,10 +1,13 @@
 package csc180.damian.swiney.workplace_incident_report_system;
 
+import csc180.damian.swiney.workplace_incident_report_system.model.Employee;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -12,6 +15,17 @@ public class EmployeesPageController {
 
     @FXML
     public Label EmployeePaneTitle;
+    @FXML
+    public TableView<Employee> employeeTable;
+    @FXML
+    public TableColumn idColumn;
+    @FXML
+    public TableColumn firstNameColumn;
+    @FXML
+    public TableColumn lastNameColumn;
+    @FXML
+    public TableColumn departmentColumn;
+
 
 
     @FXML

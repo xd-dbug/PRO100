@@ -9,7 +9,8 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 
-<VBox spacing="10" xmlns:fx="http://javafx.com/fxml" styleClass="pane" prefHeight="400.0" prefWidth="300.0"
+<?import javafx.collections.FXCollections?>
+<VBox spacing="20" xmlns:fx="http://javafx.com/fxml" styleClass="pane" prefHeight="400.0" prefWidth="300.0"
       fx:controller="csc180.damian.swiney.workplace_incident_report_system.AddReportController">
     <stylesheets>
         <URL value="@styles.css" />
@@ -18,11 +19,26 @@
         <Insets top="12" right="12" bottom="12" left="12"/>
     </padding>
 
+    <Label text="Select Incident Type:"/>
+    <ChoiceBox>
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Injury" />
+                <String fx:value="Near Miss" />
+                <String fx:value="Product Damage" />
+                <String fx:value="Property Damage" />
+                <String fx:value="Other" />
+            </FXCollections>
+        </items>
+    </ChoiceBox>
 
     <Label text="Incident Description:"/>
     <TextField fx:id="inputField" promptText="Type here"/>
+
     <Label text="Date Incident Occurred:"/>
     <DatePicker fx:id="incidentDatePicker" promptText="Incident Date"/>
+
+
 
     <HBox spacing="8" alignment="CENTER_RIGHT">
         <Button text="Cancel" onAction="#onCancel"/>
