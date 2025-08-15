@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml" styleClass="pane" prefHeight="400.0" prefWidth="300.0"
+      fx:controller="csc180.damian.swiney.workplace_incident_report_system.AddReportController">
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+    <padding>
+        <Insets top="12" right="12" bottom="12" left="12"/>
+    </padding>
+
+
+    <Label text="Incident Description:"/>
+    <TextField fx:id="inputField" promptText="Type here"/>
+    <Label text="Date Incident Occurred:"/>
+    <DatePicker fx:id="incidentDatePicker" promptText="Incident Date"/>
+
+    <HBox spacing="8" alignment="CENTER_RIGHT">
+        <Button text="Cancel" onAction="#onCancel"/>
+        <Button text="OK" defaultButton="true" onAction="#onOk"/>
+    </HBox>
+
+</VBox>

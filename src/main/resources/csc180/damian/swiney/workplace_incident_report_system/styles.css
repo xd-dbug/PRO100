@@ -1,0 +1,46 @@
+.root {
+    -fx-padding: 0px;
+    -fx-spacing: 0px;
+}
+
+.navigationBar {
+    -fx-background-color: #dfdfdf;
+
+    -fx-border-style: solid;
+    -fx-border-color: #202020;
+    -fx-border-width: 0px;
+}
+
+.navigationBar Button {
+    -fx-min-width: 80px;
+    -fx-border-radius: 10px;
+    -fx-background-color: #5490ff;
+    -fx-text-fill: white;
+}
+
+.pane {
+    -fx-padding: 40px;
+}
+
+.addItemPane {
+    -fx-padding: 40px;
+    -fx-spacing: 15px;
+}
+
+
+.addItemButton {
+    -fx-font-size: 26px;
+    -fx-border-radius: 20px;
+    -fx-background-color: #5490ff;
+    -fx-text-fill: white;
+    -fx-min-width: 55px;
+    -fx-min-height: 40px;
+
+}
+
+.pageTitleLabel {
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 20px;
+    -fx-text-fill: #5490ff;
+}

@@ -7,12 +7,32 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" prefHeight="600.0" prefWidth="700.0"
-      fx:controller="csc180.damian.swiney.workplace_incident_report_system.ReportsPageController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
 
-    <Label fx:id="ReportsPaneText">This is now the Reports Pane!</Label>
 
-</VBox>
+<BorderPane xmlns:fx="http://javafx.com/fxml" prefHeight="600.0" prefWidth="700.0" styleClass="pane"
+            fx:controller="csc180.damian.swiney.workplace_incident_report_system.ReportsPageController">
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+
+    <top>
+    </top>
+
+    <left>
+        <Label fx:id="ReportsPaneTitle" styleClass="pageTitleLabel">Incident Reports</Label>
+    </left>
+
+    <right>
+        <Button text="+" styleClass="addItemButton" onAction="#onPlusClicked"/>
+    </right>
+
+    <center>
+        <VBox alignment="CENTER" spacing="20.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+        </VBox>
+    </center>
+</BorderPane>

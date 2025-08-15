@@ -3,17 +3,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import java.net.URL?>
+
 <BorderPane xmlns:fx="http://javafx.com/fxml" prefHeight="600.0" prefWidth="700.0"
             fx:controller="csc180.damian.swiney.workplace_incident_report_system.MainController">
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
 
     <top>
-        <ToolBar>
-            <Button text="+" onAction="#onPlusClicked"/>
-            <Separator orientation="VERTICAL"/>
-        </ToolBar>
     </top>
     <left>
-        <VBox alignment="TOP_CENTER" spacing="10.0">
+        <VBox alignment="TOP_CENTER" spacing="10.0" styleClass="navigationBar">
             <Button text="Employees" onAction="#onEmployeesPageButtonPress"/>
             <Button text="Reports" onAction="#onReportsPageButtonPress"/>
         </VBox>

@@ -1,12 +1,21 @@
 package csc180.damian.swiney.workplace_incident_report_system;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class AddItemController {
+public class AddReportController {
+
     @FXML
     private TextField inputField;
+    @FXML
+    public DatePicker incidentDatePicker;
+
     private String value;
 
     @FXML
