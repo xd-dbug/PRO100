@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class WIRMSApplication extends Application {
@@ -16,7 +17,7 @@ public class WIRMSApplication extends Application {
         mainStage.setScene(scene);
         mainStage.show();
 
-
+        
     }
 
     public void stop(){

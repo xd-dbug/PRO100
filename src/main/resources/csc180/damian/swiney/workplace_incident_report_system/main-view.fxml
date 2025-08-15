@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -10,7 +7,10 @@
             fx:controller="csc180.damian.swiney.workplace_incident_report_system.MainController">
 
     <top>
-
+        <ToolBar>
+            <Button text="+" onAction="#onPlusClicked"/>
+            <Separator orientation="VERTICAL"/>
+        </ToolBar>
     </top>
     <left>
         <VBox alignment="TOP_CENTER" spacing="10.0">
