@@ -33,6 +33,20 @@
             <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
             </padding>
+
+            <TableView fx:id="reportsTable" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="272.0">
+                <columns>
+                    <TableColumn fx:id="idColumn" prefWidth="90.0" text="ReportID" />
+                    <TableColumn fx:id="titleColumn" prefWidth="90.0" text="Title" />
+                    <TableColumn fx:id="incidentTypeColumn" prefWidth="90.0" text="Incident Type" />
+                    <TableColumn fx:id="employeeIDColumn" prefWidth="90.0" text="EmployeeID" />
+                    <TableColumn fx:id="descriptionColumn" prefWidth="90.0" text="Description" />
+                    <TableColumn fx:id="actionTakenColumn" prefWidth="90.0" text="Action Taken" />
+                    <TableColumn fx:id="statusColumn" prefWidth="90.0" text="Status" />
+
+
+                </columns>
+            </TableView>
         </VBox>
     </center>
 </BorderPane>

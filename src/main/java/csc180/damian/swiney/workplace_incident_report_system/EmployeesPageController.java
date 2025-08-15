@@ -18,13 +18,13 @@ public class EmployeesPageController {
     @FXML
     public TableView<Employee> employeeTable;
     @FXML
-    public TableColumn idColumn;
+    public TableColumn<Employee, Integer> idColumn;
     @FXML
-    public TableColumn firstNameColumn;
+    public TableColumn<Employee, String> firstNameColumn;
     @FXML
-    public TableColumn lastNameColumn;
+    public TableColumn<Employee, String> lastNameColumn;
     @FXML
-    public TableColumn departmentColumn;
+    public TableColumn<Employee, String> departmentColumn;
 
 
 
