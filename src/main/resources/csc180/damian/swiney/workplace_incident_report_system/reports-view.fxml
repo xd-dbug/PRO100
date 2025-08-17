@@ -7,12 +7,55 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" prefHeight="600.0" prefWidth="700.0"
-      fx:controller="csc180.damian.swiney.workplace_incident_report_system.ReportsPageController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
 
-    <Label fx:id="ReportsPaneText">This is now the Reports Pane!</Label>
 
-</VBox>
+<BorderPane xmlns:fx="http://javafx.com/fxml" prefHeight="600.0" prefWidth="700.0" styleClass="pane"
+            fx:controller="csc180.damian.swiney.workplace_incident_report_system.ReportsPageController">
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+
+    <top>
+        <Label fx:id="ReportsPaneTitle" styleClass="pageTitleLabel">Incident Reports</Label>
+    </top>
+
+    <left>
+    </left>
+
+    <right>
+        <Button text="+" styleClass="addItemButton" onAction="#onPlusClicked"/>
+
+    </right>
+
+    <center>
+        <VBox alignment="CENTER" spacing="20.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+            <HBox spacing="8" alignment="TOP_RIGHT">
+                <Label text="Sorting:"/>
+                <Button text="ReportID" defaultButton="true" />
+                <Button text="EmployeeID" />
+                <Button text="Title" />
+                <Button text="Status" />
+            </HBox>
+
+            <TableView fx:id="reportsTable" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="272.0">
+                <columns>
+                    <TableColumn fx:id="idColumn" prefWidth="90.0" text="ReportID" />
+                    <TableColumn fx:id="titleColumn" prefWidth="90.0" text="Title" />
+                    <TableColumn fx:id="incidentTypeColumn" prefWidth="90.0" text="Incident Type" />
+                    <TableColumn fx:id="employeeIDColumn" prefWidth="90.0" text="EmployeeID" />
+                    <TableColumn fx:id="dateColumn" prefWidth="90.0" text="Date Occurred" />
+                    <TableColumn fx:id="descriptionColumn" prefWidth="90.0" text="Description" />
+                    <TableColumn fx:id="actionTakenColumn" prefWidth="90.0" text="Action Taken" />
+                    <TableColumn fx:id="statusColumn" prefWidth="90.0" text="Status" />
+
+
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>

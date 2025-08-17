@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" prefHeight="600.0" prefWidth="700.0"
+<?import java.net.URL?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" prefHeight="600.0" prefWidth="1000.0"
             fx:controller="csc180.damian.swiney.workplace_incident_report_system.MainController">
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
 
     <top>
-
     </top>
     <left>
-        <VBox alignment="TOP_CENTER" spacing="10.0">
+        <VBox alignment="TOP_CENTER" spacing="10.0" styleClass="navigationBar">
             <Button text="Employees" onAction="#onEmployeesPageButtonPress"/>
             <Button text="Reports" onAction="#onReportsPageButtonPress"/>
         </VBox>

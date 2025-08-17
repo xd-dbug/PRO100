@@ -6,8 +6,10 @@ module csc180.damian.swiney.workplace_incident_report_system {
 
 
     requires java.desktop;
+    requires java.sql;
 
 
     opens csc180.damian.swiney.workplace_incident_report_system to javafx.fxml;
     exports csc180.damian.swiney.workplace_incident_report_system;
+    exports  csc180.damian.swiney.workplace_incident_report_system.model;
 }
