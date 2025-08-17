@@ -6,9 +6,28 @@ services:
       - "${DB_PORT:-1433}:1433"
     environment:
       - ACCEPT_EULA=Y
-      - SA_PASSWORD=${SA_PASSWORD}
+      - MSSQL_SA_PASSWORD=${SA_PASSWORD}
     volumes:
       - mssql_data:/var/opt/mssql
-      - ./db:/db:ro
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "${SA_PASSWORD}", "-Q", "SELECT 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  init-db:
+    image: mcr.microsoft.com/mssql-tools
+    depends_on:
+      mssql:
+        condition: service_healthy
+    volumes:
+      - ./schema.sql:/schema/schema.sql:ro
+    env_file:
+      - .env
+    entrypoint: ["/bin/sh","-c"]
+    command: >
+      "/opt/mssql-tools/bin/sqlcmd -S mssql -U sa -P ${SA_PASSWORD}
+      -l 60 -i /schema/schema.sql"
+
 volumes:
   mssql_data:
