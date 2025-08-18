@@ -79,7 +79,8 @@ public class View {
         int id = Console.getIntInput("Enter Employee ID: ");
         String firstName = Console.getStringInput("Enter Employee First Name: ");
         String lastName = Console.getStringInput("Enter Employee Last Name: ");
-        return new Employee(id, firstName, lastName);
+        String department = Console.getStringInput("Enter Employee Department");
+        return new Employee(id, firstName, lastName, department);
 
     }
 
