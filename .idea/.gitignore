@@ -6,3 +6,11 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+
+# Local environment variables
+.env
+
+# SQL Server data files
+*.mdf
+*.ldf
+*.ndf

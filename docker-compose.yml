@@ -1,0 +1,35 @@
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: team-mssql
+    ports:
+      - "${DB_PORT:-1433}:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=${SA_PASSWORD}
+    volumes:
+      - mssql_data:/var/opt/mssql
+
+  init-db:
+    image: mcr.microsoft.com/mssql-tools
+    depends_on:
+      - mssql
+    volumes:
+      - ./schema.sql:/schema/schema.sql:ro
+    env_file:
+      - .env
+    entrypoint: ["/bin/sh","-c"]
+    command: |
+      SQLCMD="";
+      for i in /opt/mssql-tools18/bin/sqlcmd /opt/mssql-tools/bin/sqlcmd; do
+        [ -x "$i" ] && SQLCMD="$i" && break
+      done
+      until "$SQLCMD" -S mssql -U sa -P "${SA_PASSWORD}" -Q "SELECT 1" >/dev/null 2>&1; do
+        echo "Waiting for SQL Server..."; sleep 2;
+      done
+      echo "Applying schema.sql..."
+      "$SQLCMD" -S mssql -U sa -P "${SA_PASSWORD}" -l 60 -i /schema/schema.sql
+      echo "Done."
+
+volumes:
+  mssql_data:
