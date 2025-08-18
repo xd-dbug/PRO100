@@ -21,6 +21,9 @@
     <Label text="Employee Last Name:"/>
     <TextField fx:id="lastNameInputField" promptText="Type here"/>
 
+    <Label text="Employee Department:"/>
+    <TextField fx:id="departmentInputField" promptText="Type Here"/>
+
 
     <HBox spacing="8" alignment="CENTER_RIGHT">
         <Button text="Cancel" onAction="#onCancel"/>

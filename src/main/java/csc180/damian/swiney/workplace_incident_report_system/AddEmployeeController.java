@@ -14,15 +14,19 @@ public class AddEmployeeController {
     public TextField firstNameInputField;
     @FXML
     public TextField lastNameInputField;
+    @FXML
+    public TextField departmentInputField;
 
 
     private String firstName;
     private String lastName;
+    private String department;
 
     @FXML
     private void onOk(){
         firstName=firstNameInputField.getText();
         lastName=lastNameInputField.getText();
+        department=departmentInputField.getText();
         close();
     }
 
@@ -30,6 +34,7 @@ public class AddEmployeeController {
     private void onCancel(){
         firstName=null;
         lastName=null;
+        department=null;
         close();
     }
 
@@ -40,6 +45,7 @@ public class AddEmployeeController {
     public String getLastName() {
         return lastName;
     }
+    public String getDepartment() { return department; }
 
     private void close(){
         Stage stage = (Stage) lastNameInputField.getScene().getWindow();
