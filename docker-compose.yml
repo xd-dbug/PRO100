@@ -3,33 +3,34 @@ services:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: team-mssql
     ports:
-      - "1433:1433"
+      - "${DB_PORT:-11433}:1433"        # host port -> container 1433 (11433 avoids clashes)
     environment:
-      - ACCEPT_EULA=Y
-      - MSSQL_SA_PASSWORD=${SA_PASSWORD}
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${SA_PASSWORD}
     volumes:
       - mssql_data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P \"$${MSSQL_SA_PASSWORD}\" -Q \"SELECT 1\" || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
 
+  # Run this manually when you want to (re)apply the schema
   init-db:
     image: mcr.microsoft.com/mssql-tools
     depends_on:
-      - mssql
+      mssql:
+        condition: service_healthy
+    environment:
+      SA_PASSWORD: ${SA_PASSWORD}
     volumes:
-      - ./schema.sql:/schema/schema.sql:ro
-    env_file:
-      - .env
-    entrypoint: ["/bin/sh","-c"]
-    command: |
-      SQLCMD="";
-      for i in /opt/mssql-tools18/bin/sqlcmd /opt/mssql-tools/bin/sqlcmd; do
-        [ -x "$i" ] && SQLCMD="$i" && break
-      done
-      until "$SQLCMD" -S mssql -U sa -P "${SA_PASSWORD}" -Q "SELECT 1" >/dev/null 2>&1; do
-        echo "Waiting for SQL Server..."; sleep 2;
-      done
-      echo "Applying schema.sql..."
-      "$SQLCMD" -S mssql -U sa -P "${SA_PASSWORD}" -l 60 -i /schema/schema.sql
-      echo "Done."
+      - ./db:/db:ro                     # expects db/schema.sql in your repo
+    entrypoint: [ "bash", "-lc",
+      "/opt/mssql-tools/bin/sqlcmd -S mssql -U sa -P \"$${SA_PASSWORD}\" -l 60 \
+       -Q \"IF DB_ID('WIRMS') IS NULL CREATE DATABASE [WIRMS];\" \
+       && /opt/mssql-tools/bin/sqlcmd -S mssql -U sa -P \"$${SA_PASSWORD}\" -d master -i /db/schema.sql" ]
+    restart: "no"
 
 volumes:
   mssql_data:
