@@ -1,5 +1,6 @@
 package csc180.damian.swiney.workplace_incident_report_system;
 
+import csc180.damian.swiney.workplace_incident_report_system.model.Employee;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,11 +23,21 @@ public class AddEmployeeController {
     private String lastName;
     private String department;
 
+    private EmployeesPageController employeesPageController;
+
+    public void setMainController(EmployeesPageController employeesPageController) {
+        this.employeesPageController = employeesPageController;
+    }
+
+
+
     @FXML
     private void onOk(){
         firstName=firstNameInputField.getText();
         lastName=lastNameInputField.getText();
         department=departmentInputField.getText();
+        Employee employee = new Employee(1, firstName, lastName, department);
+        employeesPageController.addEmployee(employee);
         close();
     }
 

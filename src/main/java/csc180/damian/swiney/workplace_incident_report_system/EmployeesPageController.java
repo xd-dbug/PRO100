@@ -1,6 +1,8 @@
 package csc180.damian.swiney.workplace_incident_report_system;
 
 import csc180.damian.swiney.workplace_incident_report_system.model.Employee;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -26,15 +29,34 @@ public class EmployeesPageController {
     @FXML
     public TableColumn<Employee, String> departmentColumn;
 
+    private ObservableList<Employee> employees = FXCollections.observableArrayList();
 
+    public void addEmployee(Employee employee) {
+        employees.add(employee);
+    }
+
+    @FXML
+    public void initialize() {
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        departmentColumn.setCellValueFactory(new PropertyValueFactory<>("department"));
+
+        employeeTable.setItems(employees);
+    }
 
     @FXML
     public void onPlusClicked() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("add-employee-view.fxml"));
         Parent root = loader.load();
 
+        AddEmployeeController controller = loader.getController();
+        controller.setMainController(this);
+
         Stage owner = (Stage) EmployeePaneTitle.getScene().getWindow();
         Stage dialog = new Stage();
+
+
         dialog.setTitle("Add New Employee");
         dialog.initOwner(owner);
         dialog.initModality(Modality.WINDOW_MODAL);
