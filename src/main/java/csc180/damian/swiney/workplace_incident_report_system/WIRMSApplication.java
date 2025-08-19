@@ -1,5 +1,6 @@
 package csc180.damian.swiney.workplace_incident_report_system;
 
+import csc180.damian.swiney.workplace_incident_report_system.model.DataBaseManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
