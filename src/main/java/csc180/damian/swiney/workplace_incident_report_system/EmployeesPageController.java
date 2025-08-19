@@ -1,5 +1,6 @@
 package csc180.damian.swiney.workplace_incident_report_system;
 
+import csc180.damian.swiney.workplace_incident_report_system.model.DataBaseManager;
 import csc180.damian.swiney.workplace_incident_report_system.model.Employee;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +14,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.sql.*;
 
 public class EmployeesPageController {
 
@@ -30,19 +33,20 @@ public class EmployeesPageController {
     public TableColumn<Employee, String> departmentColumn;
 
     private ObservableList<Employee> employees = FXCollections.observableArrayList();
+    private final DataBaseManager db = new DataBaseManager();
 
-    public void addEmployee(Employee employee) {
-        employees.add(employee);
-    }
+
 
     @FXML
-    public void initialize() {
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+    public void initialize() throws SQLException {
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         departmentColumn.setCellValueFactory(new PropertyValueFactory<>("department"));
 
+        loadDataFromDatabase();
         employeeTable.setItems(employees);
+
     }
 
     @FXML
@@ -55,12 +59,23 @@ public class EmployeesPageController {
 
         Stage owner = (Stage) EmployeePaneTitle.getScene().getWindow();
         Stage dialog = new Stage();
-
-
         dialog.setTitle("Add New Employee");
         dialog.initOwner(owner);
         dialog.initModality(Modality.WINDOW_MODAL);
         dialog.setScene(new Scene(root, 300, 400));
         dialog.showAndWait();
     }
+
+
+
+    public void loadDataFromDatabase() throws SQLException {
+        employees.clear();
+        employees.addAll(db.getAllEmployees());
+
+    }
+
+    public void addEmployeeToTable(Employee employee) {
+        employeeTable.getItems().add(employee);
+    }
+
 }
