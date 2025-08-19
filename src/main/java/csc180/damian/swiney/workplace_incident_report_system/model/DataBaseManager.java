@@ -1,5 +1,7 @@
 package csc180.damian.swiney.workplace_incident_report_system.model;
 
+import java.sql.Connection;
+
 public class DataBaseManager {
     public DataBaseManager() {
         String connectionUrl =
@@ -9,4 +11,11 @@ public class DataBaseManager {
                         + "password=WIRMS101!!;"
                         + "loginTimeout=30;";
     }
+
+    public static Connection connect(){
+
+    }
+
+
+
 }

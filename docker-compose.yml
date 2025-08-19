@@ -1,3 +1,4 @@
+
 services:
   mssql:
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -9,27 +10,22 @@ services:
       MSSQL_SA_PASSWORD: ${SA_PASSWORD}
     volumes:
       - mssql_data:/var/opt/mssql
-    healthcheck:
-      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P \"$${MSSQL_SA_PASSWORD}\" -Q \"SELECT 1\" || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 30
-      start_period: 30s
+
 
   # Run this manually when you want to (re)apply the schema
   init-db:
     image: mcr.microsoft.com/mssql-tools
     depends_on:
       mssql:
-        condition: service_healthy
+        condition: service_started
     environment:
       SA_PASSWORD: ${SA_PASSWORD}
     volumes:
       - ./db:/db:ro                     # expects db/schema.sql in your repo
     entrypoint: [ "bash", "-lc",
-      "/opt/mssql-tools/bin/sqlcmd -S mssql -U sa -P \"$${SA_PASSWORD}\" -l 60 \
+      "/opt/mssql-tools/bin/sqlcmd -S mssql -U sa -P \"$${SA_PASSWORD}\" -C -l 60 \
        -Q \"IF DB_ID('WIRMS') IS NULL CREATE DATABASE [WIRMS];\" \
-       && /opt/mssql-tools/bin/sqlcmd -S mssql -U sa -P \"$${SA_PASSWORD}\" -d master -i /db/schema.sql" ]
+       && /opt/mssql-tools/bin/sqlcmd -S mssql -U sa -P \"$${SA_PASSWORD}\" -C -d master -i /db/schema.sql" ]
     restart: "no"
 
 volumes:
