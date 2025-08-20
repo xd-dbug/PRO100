@@ -66,6 +66,53 @@ public class DataBaseManager {
 
     }
 
+    public static void addNearMiss(String description){
+        String missSql = "INSERT INTO NearMiss (NearMissID, Description) VALUES (?,?)";
+        addToMainTable(description);
+        try{
+            PreparedStatement stmt = connect().prepareStatement(missSql);
+            stmt.setInt(1, reportID);
+            stmt.setString(2, description);
+            stmt.executeUpdate();
+
+        }catch(SQLException e){
+            System.out.println("Unable to add NearMiss");
+        }
+
+    }
+
+    public static void addProductDamage(String description, int productDamage) {
+        String productSql = "INSERT INTO ProductDamage (ProductDamageID, Description, ProductDamage) VALUES (?,?,?)";
+        addToMainTable(description);
+        try{
+            PreparedStatement stmt = connect().prepareStatement(productSql);
+            stmt.setInt(1, reportID);
+            stmt.setString(2, description);
+            stmt.setInt(3, productDamage);
+            stmt.executeUpdate();
+
+        }catch (SQLException e){
+            System.out.println("Unable to add ProductDamage");
+        }
+    }
+
+    public static void addPropertyDamage(String description, int propertyDamage) {
+        String propertySql = "INSERT INTO PropertyDamage (PropertyDamageID, Description, PropertyDamage) VALUES (?,?,?)";
+        addToMainTable(description);
+        try{
+            PreparedStatement stmt = connect().prepareStatement(propertySql);
+            stmt.setInt(1, reportID);
+            stmt.setString(2, description);
+            stmt.setInt(3, propertyDamage);
+            stmt.executeUpdate();
+
+        }catch(SQLException e){
+            System.out.println("Unable to add PropertyDamage");
+        }
+    }
+
+
+
     public static void addToMainTable(String description) {
 
         try {
