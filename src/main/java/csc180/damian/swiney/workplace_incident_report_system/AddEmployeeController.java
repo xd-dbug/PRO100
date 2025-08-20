@@ -1,5 +1,6 @@
 package csc180.damian.swiney.workplace_incident_report_system;
 
+import csc180.damian.swiney.workplace_incident_report_system.model.DataBaseManager;
 import csc180.damian.swiney.workplace_incident_report_system.model.Employee;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.sql.SQLException;
 
 public class AddEmployeeController {
     @FXML
@@ -23,6 +26,8 @@ public class AddEmployeeController {
     private String lastName;
     private String department;
 
+    private final DataBaseManager dataBaseManager = new DataBaseManager();
+
     private EmployeesPageController employeesPageController;
 
     public void setMainController(EmployeesPageController employeesPageController) {
@@ -32,12 +37,14 @@ public class AddEmployeeController {
 
 
     @FXML
-    private void onOk(){
+    private void onOk() throws SQLException {
         firstName=firstNameInputField.getText();
         lastName=lastNameInputField.getText();
         department=departmentInputField.getText();
-        Employee employee = new Employee(1, firstName, lastName, department);
-        employeesPageController.addEmployee(employee);
+        Employee newEmployee = dataBaseManager.addEmployee(firstName,lastName,department);
+        if (newEmployee != null && employeesPageController != null) {
+            employeesPageController.addEmployeeToTable(newEmployee);
+        }
         close();
     }
 
