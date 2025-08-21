@@ -4,6 +4,8 @@ import csc180.damian.swiney.workplace_incident_report_system.model.DataBaseManag
 import csc180.damian.swiney.workplace_incident_report_system.model.Employee;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -31,10 +34,13 @@ public class EmployeesPageController {
     public TableColumn<Employee, String> lastNameColumn;
     @FXML
     public TableColumn<Employee, String> departmentColumn;
+    @FXML
+    public TextField searchField;
 
     private ObservableList<Employee> employees = FXCollections.observableArrayList();
     private final DataBaseManager db = new DataBaseManager();
 
+    FilteredList<Employee> filteredData = new FilteredList<>(employees, p -> true);
 
 
     @FXML
@@ -47,7 +53,33 @@ public class EmployeesPageController {
         loadDataFromDatabase();
         employeeTable.setItems(employees);
 
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(employee -> {
+                // If no filter text, display all employees
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (employee.getFirstName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (employee.getLastName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (employee.getDepartment().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        SortedList<Employee> sortedData = new SortedList<>(filteredData);
+
+        sortedData.comparatorProperty().bind(employeeTable.comparatorProperty());
+
+        employeeTable.setItems(sortedData);
     }
+
 
     @FXML
     public void onPlusClicked() throws Exception {
@@ -67,7 +99,6 @@ public class EmployeesPageController {
     }
 
 
-
     public void loadDataFromDatabase() throws SQLException {
         employees.clear();
         employees.addAll(db.getAllEmployees());
@@ -75,7 +106,7 @@ public class EmployeesPageController {
     }
 
     public void addEmployeeToTable(Employee employee) {
-        employeeTable.getItems().add(employee);
+        employees.add(employee);
     }
 
 }
