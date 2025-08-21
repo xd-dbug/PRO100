@@ -38,9 +38,9 @@ public class AddEmployeeController {
 
     @FXML
     private void onOk() throws SQLException {
-        firstName=firstNameInputField.getText();
-        lastName=lastNameInputField.getText();
-        department=departmentInputField.getText();
+        firstName=firstNameInputField.getText().strip();
+        lastName=lastNameInputField.getText().strip();
+        department=departmentInputField.getText().strip();
         Employee newEmployee = dataBaseManager.addEmployee(firstName,lastName,department);
         if (newEmployee != null && employeesPageController != null) {
             employeesPageController.addEmployeeToTable(newEmployee);
