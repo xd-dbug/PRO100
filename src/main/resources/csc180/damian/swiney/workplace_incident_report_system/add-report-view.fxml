@@ -20,10 +20,10 @@
     </padding>
 
     <Label text="Select Incident Type:"/>
-    <ChoiceBox>
+    <ChoiceBox fx:id="DropDown">
         <items>
             <FXCollections fx:factory="observableArrayList">
-                <String fx:value="Injury" />
+                <String fx:value="Injury"/>
                 <String fx:value="Near Miss" />
                 <String fx:value="Product Damage" />
                 <String fx:value="Property Damage" />

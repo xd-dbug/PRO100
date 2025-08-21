@@ -43,6 +43,7 @@ public class DataBaseManager {
 
     public static void addReport() {
 
+
     }
 
     public static void addInjury(String description, boolean Hospitalized, String InjuryType) {
