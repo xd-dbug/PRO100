@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<?import javafx.geometry.Insets?>
-<?import javafx.geometry.Insets?>
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
-
-<BorderPane xmlns:fx="http://javafx.com/fxml" prefHeight="600.0" prefWidth="700.0" styleClass="pane"
-            fx:controller="csc180.damian.swiney.workplace_incident_report_system.ReportsPageController">
+<BorderPane prefHeight="600.0" prefWidth="700.0" styleClass="pane" xmlns:fx="http://javafx.com/fxml"  fx:controller="csc180.damian.swiney.workplace_incident_report_system.ReportsPageController">
     <stylesheets>
         <URL value="@styles.css" />
     </stylesheets>
+
+
 
     <top>
         <Label fx:id="ReportsPaneTitle" styleClass="pageTitleLabel">Incident Reports</Label>
@@ -25,30 +27,120 @@
     </left>
 
     <right>
-        <Button text="+" styleClass="addItemButton" onAction="#onPlusClicked"/>
+        <Button onAction="#onPlusClicked" styleClass="addItemButton" text="+" />
 
     </right>
 
     <center>
         <VBox alignment="CENTER" spacing="20.0">
             <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
             </padding>
+            <TabPane fx:id="reportTabs" styleClass="reportTabs" prefHeight="375.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+                <Tab text="All Reports">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="900.0">
+                        <TableView fx:id="allReportsTable" layoutX="18.0" layoutY="18.0" prefHeight="300.0" prefWidth="900.0">
+                            <columns>
+                                <TableColumn fx:id="allReportsIdColumn" prefWidth="90.0" text="ReportID"/>
+                                <TableColumn fx:id="allReportsTitleColumn" prefWidth="90.0" text="Title"/>
+                                <TableColumn fx:id="allReportsIncidentTypeColumn" prefWidth="90.0" text="Incident Type"/>
+                                <TableColumn fx:id="allReportsEmployeeIDColumn" prefWidth="90.0" text="EmployeeID"/>
+                                <TableColumn fx:id="allReportsDateColumn" prefWidth="90.0" text="Date Occurred"/>
+                                <TableColumn fx:id="allReportsDescriptionColumn" prefWidth="90.0" text="Description"/>
+                                <TableColumn fx:id="allReportsActionTakenColumn" prefWidth="90.0" text="Action Taken"/>
+                                <TableColumn fx:id="allReportsStatusColumn" prefWidth="90.0" text="Status"/>
 
-            <TableView fx:id="reportsTable" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="272.0">
-                <columns>
-                    <TableColumn fx:id="idColumn" prefWidth="90.0" text="ReportID" />
-                    <TableColumn fx:id="titleColumn" prefWidth="90.0" text="Title" />
-                    <TableColumn fx:id="incidentTypeColumn" prefWidth="90.0" text="Incident Type" />
-                    <TableColumn fx:id="employeeIDColumn" prefWidth="90.0" text="EmployeeID" />
-                    <TableColumn fx:id="dateColumn" prefWidth="90.0" text="Date Occurred" />
-                    <TableColumn fx:id="descriptionColumn" prefWidth="90.0" text="Description" />
-                    <TableColumn fx:id="actionTakenColumn" prefWidth="90.0" text="Action Taken" />
-                    <TableColumn fx:id="statusColumn" prefWidth="90.0" text="Status" />
 
+                            </columns>
+                        </TableView>
+                    </AnchorPane>
+                </Tab>
+                <Tab text="Injuries">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="900.0">
+                        <TableView fx:id="injuriesTable" layoutX="18.0" layoutY="18.0" prefHeight="300.0" prefWidth="900.0">
+                            <columns>
+                                <TableColumn fx:id="injuriesIdColumn" prefWidth="90.0" text="ReportID"/>
+                                <TableColumn fx:id="injuriesTitleColumn" prefWidth="90.0" text="Title"/>
+                                <TableColumn fx:id="injuriesIncidentTypeColumn" prefWidth="90.0" text="Incident Type"/>
+                                <TableColumn fx:id="injuriesEmployeeIDColumn" prefWidth="90.0" text="EmployeeID"/>
+                                <TableColumn fx:id="injuriesDateColumn" prefWidth="90.0" text="Date Occurred"/>
+                                <TableColumn fx:id="injuriesInjuryTypeColumn" prefWidth="90.0" text="Injury Type"/>
+                                <TableColumn fx:id="injuriesHospitalizedColumn" prefWidth="90.0" text="Hospitalized"/>
+                                <TableColumn fx:id="injuriesDescriptionColumn" prefWidth="90.0" text="Description"/>
+                                <TableColumn fx:id="injuriesActionTakenColumn" prefWidth="90.0" text="Action Taken"/>
+                                <TableColumn fx:id="injuriesStatusColumn" prefWidth="90.0" text="Status"/>
+                            </columns>
+                        </TableView>
+                    </AnchorPane>
+                </Tab>
+                <Tab text="Near Misses">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="900.0">
+                        <TableView fx:id="nearMissesTable" layoutX="18.0" layoutY="18.0" prefHeight="300.0" prefWidth="900.0">
+                            <columns>
+                                <TableColumn fx:id="nearMissesIdColumn" prefWidth="90.0" text="ReportID"/>
+                                <TableColumn fx:id="nearMissesTitleColumn" prefWidth="90.0" text="Title"/>
+                                <TableColumn fx:id="nearMissesIncidentTypeColumn" prefWidth="90.0" text="Incident Type"/>
+                                <TableColumn fx:id="nearMissesEmployeeIDColumn" prefWidth="90.0" text="EmployeeID"/>
+                                <TableColumn fx:id="nearMissesDateColumn" prefWidth="90.0" text="Date Occurred"/>
+                                <TableColumn fx:id="nearMissesDescriptionColumn" prefWidth="90.0" text="Description"/>
+                                <TableColumn fx:id="nearMissesActionTakenColumn" prefWidth="90.0" text="Action Taken"/>
+                                <TableColumn fx:id="nearMissesStatusColumn" prefWidth="90.0" text="Status"/>
+                            </columns>
+                        </TableView>
+                    </AnchorPane>
 
-                </columns>
-            </TableView>
+                </Tab>
+                <Tab text="Product Damage">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="900.0">
+                        <TableView fx:id="productDamageTable" layoutX="18.0" layoutY="18.0" prefHeight="300.0" prefWidth="900.0">
+                            <columns>
+                                <TableColumn fx:id="productDamageIdColumn" prefWidth="90.0" text="ReportID"/>
+                                <TableColumn fx:id="productDamageTitleColumn" prefWidth="90.0" text="Title"/>
+                                <TableColumn fx:id="productDamageIncidentTypeColumn" prefWidth="90.0" text="Incident Type"/>
+                                <TableColumn fx:id="productDamageEmployeeIDColumn" prefWidth="90.0" text="EmployeeID"/>
+                                <TableColumn fx:id="productDamageDateColumn" prefWidth="90.0" text="Date Occurred"/>
+                                <TableColumn fx:id="productDamageProdDamageColumn" prefWidth="150.0" text="Product Damage Value"/>
+                                <TableColumn fx:id="productDamageDescriptionColumn" prefWidth="90.0" text="Description"/>
+                                <TableColumn fx:id="productDamageActionTakenColumn" prefWidth="90.0" text="Action Taken"/>
+                                <TableColumn fx:id="productDamageStatusColumn" prefWidth="90.0" text="Status"/>
+                            </columns>
+                        </TableView>
+                    </AnchorPane>
+                </Tab>
+                <Tab text="Property Damage">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="900.0">
+                        <TableView fx:id="propertyDamageTable" layoutX="18.0" layoutY="18.0" prefHeight="300.0" prefWidth="900.0">
+                            <columns>
+                                <TableColumn fx:id="propertyDamageIdColumn" prefWidth="90.0" text="ReportID"/>
+                                <TableColumn fx:id="propertyDamageTitleColumn" prefWidth="90.0" text="Title"/>
+                                <TableColumn fx:id="propertyDamageIncidentTypeColumn" prefWidth="90.0" text="Incident Type"/>
+                                <TableColumn fx:id="propertyDamageEmployeeIDColumn" prefWidth="90.0" text="EmployeeID"/>
+                                <TableColumn fx:id="propertyDamageDateColumn" prefWidth="90.0" text="Date Occurred"/>
+                                <TableColumn fx:id="propertyDamagePropDamageColumn" prefWidth="150.0" text="Property Damage Value"/>
+                                <TableColumn fx:id="propertyDamageDescriptionColumn" prefWidth="90.0" text="Description"/>
+                                <TableColumn fx:id="propertyDamageActionTakenColumn" prefWidth="90.0" text="Action Taken"/>
+                                <TableColumn fx:id="propertyDamageStatusColumn" prefWidth="90.0" text="Status"/>
+                            </columns>
+                        </TableView>
+                    </AnchorPane>
+                </Tab>
+                <Tab text="Other">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="900.0">
+                        <TableView fx:id="otherTable" layoutX="18.0" layoutY="18.0" prefHeight="300.0" prefWidth="900.0">
+                            <columns>
+                                <TableColumn fx:id="otherIdColumn" prefWidth="90.0" text="ReportID"/>
+                                <TableColumn fx:id="otherTitleColumn" prefWidth="90.0" text="Title"/>
+                                <TableColumn fx:id="otherIncidentTypeColumn" prefWidth="90.0" text="Incident Type"/>
+                                <TableColumn fx:id="otherEmployeeIDColumn" prefWidth="90.0" text="EmployeeID"/>
+                                <TableColumn fx:id="otherDateColumn" prefWidth="90.0" text="Date Occurred"/>
+                                <TableColumn fx:id="otherDescriptionColumn" prefWidth="90.0" text="Description"/>
+                                <TableColumn fx:id="otherActionTakenColumn" prefWidth="90.0" text="Action Taken"/>
+                                <TableColumn fx:id="otherStatusColumn" prefWidth="90.0" text="Status"/>
+                            </columns>
+                        </TableView>
+                    </AnchorPane>
+                </Tab>
+            </TabPane>
         </VBox>
     </center>
 </BorderPane>

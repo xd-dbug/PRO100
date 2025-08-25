@@ -5,7 +5,7 @@
 
 <?import java.net.URL?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" prefHeight="600.0" prefWidth="1000.0"
+<BorderPane xmlns:fx="http://javafx.com/fxml" prefHeight="800.0" prefWidth="1200.0"
             fx:controller="csc180.damian.swiney.workplace_incident_report_system.MainController">
     <stylesheets>
         <URL value="@styles.css" />

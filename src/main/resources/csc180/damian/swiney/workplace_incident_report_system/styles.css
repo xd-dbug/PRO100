@@ -9,6 +9,7 @@
     -fx-border-style: solid;
     -fx-border-color: #202020;
     -fx-border-width: 0px;
+    -fx-padding: 10 0 0 0;
 }
 
 .navigationBar Button {
@@ -16,6 +17,7 @@
     -fx-border-radius: 10px;
     -fx-background-color: #5490ff;
     -fx-text-fill: white;
+
 }
 
 .pane {
@@ -44,3 +46,8 @@
     -fx-border-radius: 20px;
     -fx-text-fill: #5490ff;
 }
+
+.reportTabs {
+    -fx-background-color: white;
+}
+
