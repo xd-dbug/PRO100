@@ -104,7 +104,7 @@ public class ReportsPageController
         dialog.setTitle("Add New Report");
         dialog.initOwner(owner);
         dialog.initModality(Modality.WINDOW_MODAL);
-        dialog.setScene(new Scene(root, 300, 400));
+        dialog.setScene(new Scene(root, 500, 600));
         dialog.showAndWait();
 
         loadReports();

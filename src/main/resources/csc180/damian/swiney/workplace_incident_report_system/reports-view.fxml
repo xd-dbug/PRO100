@@ -43,9 +43,9 @@
                             <columns>
                                 <TableColumn fx:id="allReportsIdColumn" prefWidth="90.0" text="ReportID"/>
                                 <TableColumn fx:id="allReportsTitleColumn" prefWidth="90.0" text="Title"/>
-                                <TableColumn fx:id="allReportsIncidentTypeColumn" prefWidth="90.0" text="Incident Type"/>
                                 <TableColumn fx:id="allReportsEmployeeIDColumn" prefWidth="90.0" text="EmployeeID"/>
                                 <TableColumn fx:id="allReportsDateColumn" prefWidth="90.0" text="Date Occurred"/>
+                                <TableColumn fx:id="allReportsIncidentTypeColumn" prefWidth="90.0" text="Incident Type"/>
                                 <TableColumn fx:id="allReportsDescriptionColumn" prefWidth="90.0" text="Description"/>
                                 <TableColumn fx:id="allReportsActionTakenColumn" prefWidth="90.0" text="Action Taken"/>
                                 <TableColumn fx:id="allReportsStatusColumn" prefWidth="90.0" text="Status"/>
@@ -61,9 +61,9 @@
                             <columns>
                                 <TableColumn fx:id="injuriesIdColumn" prefWidth="90.0" text="ReportID"/>
                                 <TableColumn fx:id="injuriesTitleColumn" prefWidth="90.0" text="Title"/>
-                                <TableColumn fx:id="injuriesIncidentTypeColumn" prefWidth="90.0" text="Incident Type"/>
                                 <TableColumn fx:id="injuriesEmployeeIDColumn" prefWidth="90.0" text="EmployeeID"/>
                                 <TableColumn fx:id="injuriesDateColumn" prefWidth="90.0" text="Date Occurred"/>
+                                <TableColumn fx:id="injuriesIncidentTypeColumn" prefWidth="90.0" text="Incident Type"/>
                                 <TableColumn fx:id="injuriesInjuryTypeColumn" prefWidth="90.0" text="Injury Type"/>
                                 <TableColumn fx:id="injuriesHospitalizedColumn" prefWidth="90.0" text="Hospitalized"/>
                                 <TableColumn fx:id="injuriesDescriptionColumn" prefWidth="90.0" text="Description"/>
@@ -79,9 +79,9 @@
                             <columns>
                                 <TableColumn fx:id="nearMissesIdColumn" prefWidth="90.0" text="ReportID"/>
                                 <TableColumn fx:id="nearMissesTitleColumn" prefWidth="90.0" text="Title"/>
-                                <TableColumn fx:id="nearMissesIncidentTypeColumn" prefWidth="90.0" text="Incident Type"/>
                                 <TableColumn fx:id="nearMissesEmployeeIDColumn" prefWidth="90.0" text="EmployeeID"/>
                                 <TableColumn fx:id="nearMissesDateColumn" prefWidth="90.0" text="Date Occurred"/>
+                                <TableColumn fx:id="nearMissesIncidentTypeColumn" prefWidth="90.0" text="Incident Type"/>
                                 <TableColumn fx:id="nearMissesDescriptionColumn" prefWidth="90.0" text="Description"/>
                                 <TableColumn fx:id="nearMissesActionTakenColumn" prefWidth="90.0" text="Action Taken"/>
                                 <TableColumn fx:id="nearMissesStatusColumn" prefWidth="90.0" text="Status"/>
@@ -96,9 +96,9 @@
                             <columns>
                                 <TableColumn fx:id="productDamageIdColumn" prefWidth="90.0" text="ReportID"/>
                                 <TableColumn fx:id="productDamageTitleColumn" prefWidth="90.0" text="Title"/>
-                                <TableColumn fx:id="productDamageIncidentTypeColumn" prefWidth="90.0" text="Incident Type"/>
                                 <TableColumn fx:id="productDamageEmployeeIDColumn" prefWidth="90.0" text="EmployeeID"/>
                                 <TableColumn fx:id="productDamageDateColumn" prefWidth="90.0" text="Date Occurred"/>
+                                <TableColumn fx:id="productDamageIncidentTypeColumn" prefWidth="90.0" text="Incident Type"/>
                                 <TableColumn fx:id="productDamageProdDamageColumn" prefWidth="150.0" text="Product Damage Value"/>
                                 <TableColumn fx:id="productDamageDescriptionColumn" prefWidth="90.0" text="Description"/>
                                 <TableColumn fx:id="productDamageActionTakenColumn" prefWidth="90.0" text="Action Taken"/>
@@ -113,9 +113,9 @@
                             <columns>
                                 <TableColumn fx:id="propertyDamageIdColumn" prefWidth="90.0" text="ReportID"/>
                                 <TableColumn fx:id="propertyDamageTitleColumn" prefWidth="90.0" text="Title"/>
-                                <TableColumn fx:id="propertyDamageIncidentTypeColumn" prefWidth="90.0" text="Incident Type"/>
                                 <TableColumn fx:id="propertyDamageEmployeeIDColumn" prefWidth="90.0" text="EmployeeID"/>
                                 <TableColumn fx:id="propertyDamageDateColumn" prefWidth="90.0" text="Date Occurred"/>
+                                <TableColumn fx:id="propertyDamageIncidentTypeColumn" prefWidth="90.0" text="Incident Type"/>
                                 <TableColumn fx:id="propertyDamagePropDamageColumn" prefWidth="150.0" text="Property Damage Value"/>
                                 <TableColumn fx:id="propertyDamageDescriptionColumn" prefWidth="90.0" text="Description"/>
                                 <TableColumn fx:id="propertyDamageActionTakenColumn" prefWidth="90.0" text="Action Taken"/>
@@ -130,9 +130,9 @@
                             <columns>
                                 <TableColumn fx:id="otherIdColumn" prefWidth="90.0" text="ReportID"/>
                                 <TableColumn fx:id="otherTitleColumn" prefWidth="90.0" text="Title"/>
-                                <TableColumn fx:id="otherIncidentTypeColumn" prefWidth="90.0" text="Incident Type"/>
                                 <TableColumn fx:id="otherEmployeeIDColumn" prefWidth="90.0" text="EmployeeID"/>
                                 <TableColumn fx:id="otherDateColumn" prefWidth="90.0" text="Date Occurred"/>
+                                <TableColumn fx:id="otherIncidentTypeColumn" prefWidth="90.0" text="Incident Type"/>
                                 <TableColumn fx:id="otherDescriptionColumn" prefWidth="90.0" text="Description"/>
                                 <TableColumn fx:id="otherActionTakenColumn" prefWidth="90.0" text="Action Taken"/>
                                 <TableColumn fx:id="otherStatusColumn" prefWidth="90.0" text="Status"/>
