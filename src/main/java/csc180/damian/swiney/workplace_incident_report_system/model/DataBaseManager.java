@@ -1,5 +1,7 @@
 package csc180.damian.swiney.workplace_incident_report_system.model;
 
+import csc180.damian.swiney.workplace_incident_report_system.model.typeOfReports.Other;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +52,6 @@ public class DataBaseManager {
         String InjurySql = "INSERT INTO Injury (InjuryID, Hospitalized, InjuryType) VALUES (?,?,?)";
 
         addToMainTable(description);
-//
 
         try {
             PreparedStatement injuryStmt = connect().prepareStatement(InjurySql);
@@ -177,6 +178,29 @@ public class DataBaseManager {
         return employees;
     }
 
+    public static List<Report> getAllReports()
+    {
+        List<Report> reports = new ArrayList<>();
+        String sql = "SELECT ReportID, Description FROM MainTable";
+
+        try (Connection conn = connect();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next())
+            {
+                int id = rs.getInt("ReportID");
+                String description = rs.getString("Description");
+
+                reports.add(new Other("N/A", "N/A", "N/A", description, "Open"));
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Unable to fetch reports: " + e.getMessage());
+        }
+        return reports;
+    }
 
 
 

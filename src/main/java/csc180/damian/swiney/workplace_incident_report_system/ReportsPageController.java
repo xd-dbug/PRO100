@@ -1,8 +1,11 @@
 package csc180.damian.swiney.workplace_incident_report_system;
 
+import csc180.damian.swiney.workplace_incident_report_system.model.DataBaseManager;
 import csc180.damian.swiney.workplace_incident_report_system.model.Report;
 import csc180.damian.swiney.workplace_incident_report_system.model.TypeOfReport;
 import csc180.damian.swiney.workplace_incident_report_system.model.typeOfReports.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +19,8 @@ import javafx.stage.Stage;
 
 import java.sql.Date;
 
-public class ReportsPageController {
+public class ReportsPageController
+{
     public Label ReportsPaneTitle;
     public TabPane reportTabs;
 
@@ -84,7 +88,11 @@ public class ReportsPageController {
     public TableColumn<Other, String> otherActionTakenColumn;
     public TableColumn<Other, String> otherStatusColumn;
 
-
+    public void loadReports()
+    {
+        ObservableList<Report> reportList = FXCollections.observableArrayList(DataBaseManager.getAllReports());
+        allReportsTable.setItems(reportList);
+    }
 
     @FXML
     public void onPlusClicked() throws Exception {
@@ -98,6 +106,9 @@ public class ReportsPageController {
         dialog.initModality(Modality.WINDOW_MODAL);
         dialog.setScene(new Scene(root, 300, 400));
         dialog.showAndWait();
+
+        loadReports();
     }
+
 
 }
