@@ -6,6 +6,7 @@ USE [WIRMS];
 GO
 
 /* Drop in FK-safe order (subtables first), then recreate */
+IF OBJECT_ID('dbo.MainTable', 'U')      IS NOT NULL DROP TABLE dbo.MainTable;
 IF OBJECT_ID('dbo.NearMiss', 'U')       IS NOT NULL DROP TABLE dbo.NearMiss;
 IF OBJECT_ID('dbo.PropertyDamage', 'U') IS NOT NULL DROP TABLE dbo.PropertyDamage;
 IF OBJECT_ID('dbo.ProductDamage', 'U')  IS NOT NULL DROP TABLE dbo.ProductDamage;
