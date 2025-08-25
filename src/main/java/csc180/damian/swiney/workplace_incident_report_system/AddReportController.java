@@ -48,7 +48,7 @@ public class AddReportController
                 TypeOfReport.PROPERTY_DAMAGE.name(),
                 TypeOfReport.OTHER.name()
         ));
-        
+
         hideIncidentSpecificFields();
 
         incidentTypeDropDown.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
