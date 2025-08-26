@@ -48,10 +48,10 @@ public class DataBaseManager {
 
     }
 
-    public static void addInjury(String description, boolean Hospitalized, String InjuryType) {
+    public static void addInjury(String description,String Title,String IncidentType,String ActionTaken,String Status, boolean Hospitalized, String InjuryType) {
         String InjurySql = "INSERT INTO Injury (InjuryID, Hospitalized, InjuryType) VALUES (?,?,?)";
 
-        addToMainTable(description);
+        addToMainTable(description,Title,IncidentType,ActionTaken,Status);
 
         try {
             PreparedStatement injuryStmt = connect().prepareStatement(InjurySql);
@@ -68,9 +68,9 @@ public class DataBaseManager {
 
     }
 
-    public static void addNearMiss(String description){
+    public static void addNearMiss(String description,String Title,String IncidentType,String ActionTaken,String Status){
         String missSql = "INSERT INTO NearMiss (NearMissID, Description) VALUES (?,?)";
-        addToMainTable(description);
+        addToMainTable(description,Title,IncidentType,ActionTaken,Status);
         try{
             PreparedStatement stmt = connect().prepareStatement(missSql);
             stmt.setInt(1, reportID);
@@ -83,9 +83,9 @@ public class DataBaseManager {
 
     }
 
-    public static void addProductDamage(String description, int productDamage) {
+    public static void addProductDamage(String description,String Title,String IncidentType,String ActionTaken,String Status, int productDamage) {
         String productSql = "INSERT INTO ProductDamage (ProductDamageID, Description, ProductDamage) VALUES (?,?,?)";
-        addToMainTable(description);
+        addToMainTable(description,Title,IncidentType,ActionTaken,Status);
         try{
             PreparedStatement stmt = connect().prepareStatement(productSql);
             stmt.setInt(1, reportID);
@@ -98,9 +98,9 @@ public class DataBaseManager {
         }
     }
 
-    public static void addPropertyDamage(String description, int propertyDamage) {
+    public static void addPropertyDamage(String description,String Title,String IncidentType,String ActionTaken,String Status, int propertyDamage) {
         String propertySql = "INSERT INTO PropertyDamage (PropertyDamageID, Description, PropertyDamage) VALUES (?,?,?)";
-        addToMainTable(description);
+        addToMainTable(description,Title,IncidentType,ActionTaken,Status);
         try{
             PreparedStatement stmt = connect().prepareStatement(propertySql);
             stmt.setInt(1, reportID);
@@ -115,14 +115,18 @@ public class DataBaseManager {
 
 
 
-    public static void addToMainTable(String description) {
+    public static void addToMainTable(String description,String Title,String IncidentType,String ActionTaken,String Status) {
 
         try {
-            String MainSql = "INSERT INTO MainTable(Description) VALUES (?)";
-            PreparedStatement stmt = connect().prepareStatement(MainSql);
+            String MainSql = "INSERT INTO MainTable(Description,Title,IncidentType,ActionTaken,Status) VALUES (?,?,?,?,?)";
+            PreparedStatement stmt = connect().prepareStatement(MainSql, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, description);
+            stmt.setString(2, Title);
+            stmt.setString(3, IncidentType);
+            stmt.setString(4, ActionTaken);
+            stmt.setString(5, Status);
             stmt.executeUpdate();
-            ResultSet rs = stmt.executeQuery();
+            ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
                 reportID = rs.getInt(1);
             } else {
