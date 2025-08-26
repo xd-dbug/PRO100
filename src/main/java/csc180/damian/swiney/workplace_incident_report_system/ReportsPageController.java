@@ -105,7 +105,7 @@ public class ReportsPageController
     public void loadReports()
     {
         reportList.clear();
-        reportList.addAll(db.getAllReports());
+        reportList.addAll(DataBaseManager.getAllReports());
     }
 
     public void addReportToTable(Report report){
