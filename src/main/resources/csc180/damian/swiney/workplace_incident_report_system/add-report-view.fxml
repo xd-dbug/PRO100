@@ -1,48 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import java.net.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import java.net.URL?>
-<?import javafx.geometry.Insets?>
-
-<?import javafx.collections.FXCollections?>
-<VBox spacing="20" xmlns:fx="http://javafx.com/fxml" styleClass="pane" prefHeight="400.0" prefWidth="300.0"
-      fx:controller="csc180.damian.swiney.workplace_incident_report_system.AddReportController">
+<BorderPane prefHeight="600.0" prefWidth="500.0" styleClass="pane"  xmlns:fx="http://javafx.com/fxml" fx:controller="csc180.damian.swiney.workplace_incident_report_system.AddReportController">
     <stylesheets>
         <URL value="@styles.css" />
     </stylesheets>
     <padding>
-        <Insets top="12" right="12" bottom="12" left="12"/>
+        <Insets bottom="12" left="12" right="12" top="12" />
     </padding>
 
-    <Label text="Select Incident Type:"/>
-    <ChoiceBox fx:id="DropDown">
-        <items>
-            <FXCollections fx:factory="observableArrayList">
-                <String fx:value="Injury"/>
-                <String fx:value="Near Miss" />
-                <String fx:value="Product Damage" />
-                <String fx:value="Property Damage" />
-                <String fx:value="Other" />
-            </FXCollections>
-        </items>
-    </ChoiceBox>
+    <center>
+        <ScrollPane styleClass="scrollPane" prefHeight="500.0" prefWidth="400.0">
+            <VBox styleClass="addReportPane" prefHeight="500.0" prefWidth="400.0">
+                <Label styleClass="addReportLabel" text="Incident Title:" />
+                <TextField styleClass="addReportTextField" fx:id="titleInputField" promptText="Type here" />
 
-    <Label text="Incident Description:"/>
-    <TextField fx:id="inputField" promptText="Type here"/>
+                <Label styleClass="addReportLabel" text="Employee Involved in Incident:" />
+                <TextField styleClass="addReportTextField" fx:id="employeeInputField" promptText="Enter EmployeeID" />
 
-    <Label text="Date Incident Occurred:"/>
-    <DatePicker fx:id="incidentDatePicker" promptText="Incident Date"/>
+                <Label styleClass="addReportLabel" text="Date Incident Occurred:" />
+                <DatePicker fx:id="incidentDatePicker" promptText="Incident Date" />
+
+                <Label styleClass="addReportLabel" text="Select Incident Type:" />
+                <ChoiceBox fx:id="incidentTypeDropDown">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Injury" />
+                            <String fx:value="Near Miss" />
+                            <String fx:value="Product Damage" />
+                            <String fx:value="Property Damage" />
+                            <String fx:value="Other" />
+                        </FXCollections>
+                    </items>
+                </ChoiceBox>
+
+                <VBox fx:id="injuryFields">
+                    <Label styleClass="addReportLabel" text="Injury Type:" />
+                    <TextField styleClass="addReportTextField" fx:id="injuryTypeInputField" promptText="Enter Injury Type" />
+
+                    <Label styleClass="addReportLabel" text="Hospitalized:" />
+                    <CheckBox fx:id="hospitalizedCheckbox"/>
+                </VBox>
+
+                <VBox fx:id="productDamageFields">
+                    <Label styleClass="addReportLabel" text="Product Damage Value:" />
+                    <TextField styleClass="addReportTextField" fx:id="productDamageInputField" promptText="Enter Value of Product Damage" />
+                </VBox>
+
+                <VBox fx:id="propertyDamageFields">
+                    <Label styleClass="addReportLabel" text="Property Damage Value:" />
+                    <TextField styleClass="addReportTextField" fx:id="propertyDamageInputField" promptText="Enter Value of Property Damage" />
+                </VBox>
 
 
 
-    <HBox spacing="8" alignment="CENTER_RIGHT">
-        <Button text="Cancel" onAction="#onCancel"/>
-        <Button text="OK" defaultButton="true" onAction="#onOk"/>
-    </HBox>
+                <Label styleClass="addReportLabel" text="Incident Description:" />
+                <TextField styleClass="addReportTextField" fx:id="descriptionInputField" promptText="Type here" />
 
-</VBox>
+                <Label styleClass="addReportLabel" text="Action Taken:" />
+                <TextField styleClass="addReportTextField" fx:id="actionTakenInputField" promptText="Type here" />
+
+                <Label styleClass="addReportLabel" text="Incident Status:" />
+                <TextField styleClass="addReportTextField" fx:id="statusInputField" promptText="Type here" />
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="8">
+            <Button cancelButton="true" onAction="#onCancel" text="Cancel" />
+            <Button defaultButton="true" onAction="#onOk" text="OK" />
+        </HBox>
+    </bottom>
+</BorderPane>

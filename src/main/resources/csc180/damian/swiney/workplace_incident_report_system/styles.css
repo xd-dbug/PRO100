@@ -51,3 +51,19 @@
     -fx-background-color: white;
 }
 
+.addReportTextField {
+
+}
+
+.addReportLabel {
+    -fx-padding: 25 5 0 0;
+}
+
+.scrollPane {
+    -fx-background-color: white;
+}
+
+.addReportPane {
+    -fx-background-color: white;
+    -fx-padding: 15;
+}

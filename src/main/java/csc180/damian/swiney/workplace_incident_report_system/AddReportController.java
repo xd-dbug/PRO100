@@ -4,38 +4,95 @@ import csc180.damian.swiney.workplace_incident_report_system.model.DataBaseManag
 import csc180.damian.swiney.workplace_incident_report_system.model.TypeOfReport;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class AddReportController
 {
 
-    @FXML private TextField inputField;
+    @FXML public TextField titleInputField;
+    @FXML public TextField employeeInputField;
     @FXML public DatePicker incidentDatePicker;
-    @FXML public ChoiceBox<String> DropDown;
+    @FXML public ChoiceBox<String> incidentTypeDropDown;
+
+    @FXML public VBox injuryFields;
+    @FXML public TextField injuryTypeInputField;
+    @FXML public CheckBox hospitalizedCheckbox;
+
+    @FXML public VBox productDamageFields;
+    @FXML public TextField productDamageInputField;
+
+    @FXML public VBox propertyDamageFields;
+    @FXML public TextField propertyDamageInputField;
+
+
+    @FXML private TextField descriptionInputField;
+    @FXML public TextField actionTakenInputField;
+    @FXML public TextField statusInputField;
+
+
+
 
     private String value;
 
     @FXML
-    private void initialize()
-    {
-        DropDown.setItems(FXCollections.observableArrayList(
-                TypeOfReport.NEAR_MISS.name(),
-                TypeOfReport.PROPERTY_DAMAGE.name(),
-                TypeOfReport.PRODUCT_DAMAGE.name(),
+    private void initialize() {
+        incidentTypeDropDown.setItems(FXCollections.observableArrayList(
                 TypeOfReport.INJURY.name(),
+                TypeOfReport.NEAR_MISS.name(),
+                TypeOfReport.PRODUCT_DAMAGE.name(),
+                TypeOfReport.PROPERTY_DAMAGE.name(),
                 TypeOfReport.OTHER.name()
         ));
-        DropDown.getSelectionModel().select(TypeOfReport.NEAR_MISS.name());
+
+        hideIncidentSpecificFields();
+
+        incidentTypeDropDown.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            hideIncidentSpecificFields();
+
+            switch (incidentTypeDropDown.getSelectionModel().getSelectedItem()) {
+                case "INJURY":
+                    injuryFields.setVisible(true);
+                    injuryFields.setManaged(true);
+                    break;
+
+                case "PRODUCT_DAMAGE":
+                    productDamageFields.setVisible(true);
+                    productDamageFields.setManaged(true);
+                    break;
+                case "PROPERTY_DAMAGE":
+                    propertyDamageFields.setVisible(true);
+                    propertyDamageFields.setManaged(true);
+                    break;
+
+                default:
+                     break;
+            }
+
+        });
+
+    }
+
+    public void hideIncidentSpecificFields() {
+        injuryFields.setVisible(false);
+        injuryFields.setManaged(false);
+
+        productDamageFields.setVisible(false);
+        productDamageFields.setManaged(false);
+
+        propertyDamageFields.setVisible(false);
+        propertyDamageFields.setManaged(false);
     }
 
     @FXML
     private void onOk()
     {
-        value = inputField.getText();
-        String selected = DropDown.getSelectionModel().getSelectedItem();
+        value = descriptionInputField.getText();
+        String selected = incidentTypeDropDown.getSelectionModel().getSelectedItem();
 
         if (value == null || value.isBlank())
         {
@@ -88,7 +145,7 @@ public class AddReportController
 
     private void close()
     {
-        Stage stage = (Stage) inputField.getScene().getWindow();
+        Stage stage = (Stage) descriptionInputField.getScene().getWindow();
         stage.close();
     }
 }
