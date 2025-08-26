@@ -206,6 +206,14 @@ public class DataBaseManager {
         return reports;
     }
 
+    public static void deleteEmployee(int employeeID) throws SQLException {
+        String sql = "DELETE FROM employees WHERE EmployeeID = ?";
+
+        try(Connection conn = connect(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, employeeID);
+            stmt.executeUpdate();
+        }
+    }
 
 
 

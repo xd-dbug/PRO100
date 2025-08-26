@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -36,6 +37,8 @@ public class EmployeesPageController {
     public TableColumn<Employee, String> departmentColumn;
     @FXML
     public TextField searchField;
+    public TextField deleteIdField;
+
 
     private ObservableList<Employee> employees = FXCollections.observableArrayList();
     private final DataBaseManager db = new DataBaseManager();
@@ -99,6 +102,8 @@ public class EmployeesPageController {
     }
 
 
+
+
     public void loadDataFromDatabase() throws SQLException {
         employees.clear();
         employees.addAll(db.getAllEmployees());
@@ -109,4 +114,26 @@ public class EmployeesPageController {
         employees.add(employee);
     }
 
+
+
+    public void onDelClick() throws SQLException {
+        String idText = deleteIdField.getText();
+        if (idText == null || idText.trim().isEmpty()) {
+            System.out.println("Please enter an Employee ID.");
+            return;
+        }
+        try {
+            int employeeId = Integer.parseInt(idText);
+            DataBaseManager.deleteEmployee(employeeId);
+            System.out.println("Deleting employee with ID: " + employeeId);
+
+            employeeTable.setItems(FXCollections.observableArrayList(db.getAllEmployees()));
+
+            deleteIdField.clear();
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid Employee ID. Must be a number.");
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
