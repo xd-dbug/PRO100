@@ -37,7 +37,11 @@ public class AddReportController
 
 
 
-    private String value;
+    private String Description;
+    private String Title;
+    private String IncidentType;
+    private String ActionTaken;
+    private String Status;
 
     @FXML
     private void initialize() {
@@ -91,14 +95,14 @@ public class AddReportController
     @FXML
     private void onOk()
     {
-        value = descriptionInputField.getText();
+        Description = descriptionInputField.getText();
+        Title = titleInputField.getText();
+        ActionTaken = actionTakenInputField.getText();
+        Status = statusInputField.getText();
+        IncidentType = incidentTypeDropDown.getSelectionModel().getSelectedItem();
+
         String selected = incidentTypeDropDown.getSelectionModel().getSelectedItem();
 
-        if (value == null || value.isBlank())
-        {
-            close();
-            return;
-        }
 
         try
         {
@@ -108,20 +112,28 @@ public class AddReportController
                 switch (type)
                 {
                     case NEAR_MISS:
-                        DataBaseManager.addNearMiss(value);
+                        DataBaseManager.addNearMiss(Description, Title, IncidentType, ActionTaken, Status);
                         break;
                     case PRODUCT_DAMAGE:
-                        DataBaseManager.addProductDamage(value, 0);
+                        int damage = Integer.parseInt(productDamageInputField.getText());
+                        DataBaseManager.addProductDamage(Description,Title,IncidentType,ActionTaken,Status,damage);
                         break;
                     case PROPERTY_DAMAGE:
-                        DataBaseManager.addPropertyDamage(value, 0);
+                        int proDamage = Integer.parseInt(propertyDamageInputField.getText());
+                        DataBaseManager.addPropertyDamage(Description,Title,IncidentType,ActionTaken,Status,proDamage);
                         break;
                     case INJURY:
-                        DataBaseManager.addInjury(value, false, "Unspecified");
+                        Boolean inHospital;
+                        if(hospitalizedCheckbox.isSelected()){
+                            inHospital = true;
+                        }else{
+                            inHospital = false;
+                        }
+                        DataBaseManager.addInjury(Description,Title,IncidentType,ActionTaken,Status,inHospital,IncidentType);
                         break;
                     case OTHER:
                     default:
-                        DataBaseManager.addToMainTable(value);
+                        DataBaseManager.addToMainTable(Description,Title,IncidentType,ActionTaken,Status);
                         break;
                 }
             }
@@ -137,11 +149,9 @@ public class AddReportController
     @FXML
     private void onCancel()
     {
-        value = null;
         close();
     }
 
-    public String getValue() { return value; }
 
     private void close()
     {
