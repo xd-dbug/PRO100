@@ -30,7 +30,6 @@
     </top>
 
     <left>
-        <Button text="Delete" styleClass="addItemButton" onAction="#onDelClick"/>
     </left>
 
     <right>

@@ -18,6 +18,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.sql.Date;
+import java.sql.SQLException;
 
 public class ReportsPageController
 {
@@ -88,16 +89,36 @@ public class ReportsPageController
     public TableColumn<Other, String> otherActionTakenColumn;
     public TableColumn<Other, String> otherStatusColumn;
 
+
+    ObservableList<Report> reportList = FXCollections.observableArrayList(DataBaseManager.getAllReports());
+    DataBaseManager db = new DataBaseManager();
+
+
+    @FXML
+    public void initialize() throws SQLException {
+        loadReports();
+        allReportsTable.setItems(reportList);
+    }
+
+
+
     public void loadReports()
     {
-        ObservableList<Report> reportList = FXCollections.observableArrayList(DataBaseManager.getAllReports());
-        allReportsTable.setItems(reportList);
+        reportList.clear();
+        reportList.addAll(db.getAllReports());
+    }
+
+    public void addReportToTable(Report report){
+        reportList.add(report);
     }
 
     @FXML
     public void onPlusClicked() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("add-report-view.fxml"));
         Parent root = loader.load();
+
+        AddReportController controller = loader.getController();
+        controller.setController(this);
 
         Stage owner = (Stage) ReportsPaneTitle.getScene().getWindow();
         Stage dialog = new Stage();

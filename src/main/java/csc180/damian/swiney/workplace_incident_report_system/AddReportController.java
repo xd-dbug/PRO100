@@ -36,6 +36,12 @@ public class AddReportController
 
 
 
+    private final DataBaseManager db = new DataBaseManager();
+    private ReportsPageController reportsPageController;
+
+    public void setController(ReportsPageController reportsPageController){
+        this.reportsPageController = reportsPageController;
+    }
 
     private String value;
 
