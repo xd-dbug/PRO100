@@ -119,14 +119,14 @@ public class DataBaseManager {
 
 
 
-    public static void addToMainTable(String description,String Title,String IncidentType,String ActionTaken,String Status) {
+    public static void addToMainTable(String description,String Title,String IncidentType,String ActionTaken,String Status, int EmployeeID) {
 
         try {
-            String MainSql = "INSERT INTO MainTable(Description,Title,IncidentType,ActionTaken,Status) VALUES (?,?,?,?,?)";
+            String MainSql = "INSERT INTO MainTable(Title,EmployeeID,DataOccured,IncidentType,Description,ActionTaken,Status) VALUES (?,?,?,?,?)";
             PreparedStatement stmt = connect().prepareStatement(MainSql, Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, description);
-            stmt.setString(2, Title);
-            stmt.setString(3, IncidentType);
+            stmt.setString(1, Title);
+            stmt.setString(2, EmployeeID);
+            stmt.setDate(3, new java.sql.Date(System.currentTimeMillis()));
             stmt.setString(4, ActionTaken);
             stmt.setString(5, Status);
             stmt.executeUpdate();
@@ -209,6 +209,7 @@ public class DataBaseManager {
                     case "INJURY":
                         break;
                     case "NEAR_MISS":
+
                         break;
                     case "PRODUCT_DAMAGE":
                         break;
