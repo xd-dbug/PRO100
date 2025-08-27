@@ -4,7 +4,7 @@ package csc180.damian.swiney.workplace_incident_report_system.model;
 
 public abstract class Report {
     private String fileName;
-    private String associateName;
+    private int employeeID;
     private TypeOfReport typeOfReport;
     private String description;
     private static int id;
@@ -12,9 +12,9 @@ public abstract class Report {
     private String status;
 
 
-    public Report(String fileName, String associateName, String description, String actionTaken, String status) {
+    public Report(String fileName, int employeeID, String description, String actionTaken, String status) {
         setFileName(fileName);
-        setAssociateName(associateName);
+        setEmployeeID(employeeID);
         setDescription(description);
         setActionTaken(actionTaken);
         setStatus(status);
@@ -33,11 +33,11 @@ public abstract class Report {
     protected void setFileName(String fileName) {
         this.fileName = fileName;
     }
-    public String getAssociateName() {
-        return associateName;
+    public int getEmployee() {
+        return employeeID;
     }
-    protected void setAssociateName(String associateName) {
-        this.associateName = associateName;
+    protected void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
     }
     public TypeOfReport getTypeOfReport() {
         return typeOfReport;
@@ -71,7 +71,7 @@ public abstract class Report {
         StringBuilder sb = new StringBuilder();
         sb.append("ID: ").append(getId()).append("\n");
         sb.append("File: ").append(getFileName()).append("\n");
-        sb.append("Associate Name: ").append(getAssociateName()).append("\n");
+        sb.append("Employee ID: ").append(getEmployee()).append("\n");
         sb.append("Description: ").append(getDescription()).append("\n");
         sb.append("Action Taken: ").append(getActionTaken()).append("\n");
         sb.append("Status: ").append(getStatus()).append("\n");

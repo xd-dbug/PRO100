@@ -8,8 +8,8 @@ public class Injury extends Report {
     private String injuryType;
     private boolean isHospitalized;
 
-    public Injury(String fileName, String associateName, String actionTaken, String description, String injuryType, boolean isHospitalized, String status) {
-        super(fileName, associateName, actionTaken, description, status);
+    public Injury(String fileName, int employeeID, String actionTaken, String description, String injuryType, boolean isHospitalized, String status) {
+        super(fileName, employeeID , actionTaken, description, status);
         setInjuryType(injuryType);
         setHospitalized(isHospitalized);
         setTypeOfReport(TypeOfReport.INJURY);

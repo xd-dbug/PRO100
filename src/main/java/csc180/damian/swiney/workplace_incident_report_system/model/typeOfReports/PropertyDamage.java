@@ -6,8 +6,8 @@ import csc180.damian.swiney.workplace_incident_report_system.model.TypeOfReport;
 public class PropertyDamage extends Report {
     private int propertyDamage;
 
-    public PropertyDamage(String fileName, String associateName, String description, String actionTaken, String status, int propertyDamage) {
-        super(fileName, associateName, description, actionTaken, status);
+    public PropertyDamage(String fileName, int employeeID, String description, String actionTaken, String status, int propertyDamage) {
+        super(fileName, employeeID, description, actionTaken, status);
         setPropertyDamage(propertyDamage);
         setTypeOfReport(TypeOfReport.PROPERTY_DAMAGE);
     }

@@ -1,5 +1,6 @@
 package csc180.damian.swiney.workplace_incident_report_system.model;
 
+import csc180.damian.swiney.workplace_incident_report_system.model.typeOfReports.Injury;
 import csc180.damian.swiney.workplace_incident_report_system.model.typeOfReports.Other;
 
 import java.sql.*;
@@ -48,7 +49,7 @@ public class DataBaseManager {
 
     }
 
-    public static void addInjury(String description,String Title,String IncidentType,String ActionTaken,String Status, boolean Hospitalized, String InjuryType) {
+    public static Report addInjury(String description,String Title,String IncidentType,String ActionTaken,String Status, boolean Hospitalized, String InjuryType) {
         String InjurySql = "INSERT INTO Injury (InjuryID, Hospitalized, InjuryType) VALUES (?,?,?)";
 
         addToMainTable(description,Title,IncidentType,ActionTaken,Status);
@@ -65,6 +66,9 @@ public class DataBaseManager {
             System.out.println("Unable to add Injury");
         }
 
+        Report injuryReport = new Injury(Title,reportID,ActionTaken,description,InjuryType,Hospitalized,Status);
+
+        return injuryReport;
 
     }
 
@@ -185,7 +189,7 @@ public class DataBaseManager {
     public static List<Report> getAllReports()
     {
         List<Report> reports = new ArrayList<>();
-        String sql = "SELECT ReportID, Description FROM MainTable";
+        String sql = "SELECT * FROM MainTable";
 
         try (Connection conn = connect();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -193,10 +197,18 @@ public class DataBaseManager {
 
             while (rs.next())
             {
+                String incidentType = rs.getString("IncidentType");
+                switch(incidentType){
+                    case "INJURY":
+                        
+                        ;
+                }
+
                 int id = rs.getInt("ReportID");
                 String description = rs.getString("Description");
 
-                reports.add(new Other("N/A", "N/A", "N/A", description, "Open"));
+
+                reports.add(new Other("N/A", 0, "N/A", description, "Open"));
             }
         }
         catch (SQLException e)
