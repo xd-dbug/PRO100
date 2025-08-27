@@ -2,18 +2,21 @@ package csc180.damian.swiney.workplace_incident_report_system.model.typeOfReport
 
 
 import csc180.damian.swiney.workplace_incident_report_system.model.Report;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class ProductDamage extends Report {
-    private int damage;
-    public ProductDamage(String fileName, int employeeID, String description, String actionTaken, String status, int damage) {
+
+    private SimpleIntegerProperty damage;
+
+    public ProductDamage(String fileName, int employeeID, String description, String actionTaken, String status, SimpleIntegerProperty damage) {
         super(fileName, employeeID, description, actionTaken, status);
         setProductDamage(damage);
     }
 
-    public int getProductDamage() {
+    public SimpleIntegerProperty getProductDamage() {
         return damage;
     }
-    public void setProductDamage(int propertyDamage) {
+    public void setProductDamage(SimpleIntegerProperty propertyDamage) {
         this.damage = propertyDamage;
     }
 

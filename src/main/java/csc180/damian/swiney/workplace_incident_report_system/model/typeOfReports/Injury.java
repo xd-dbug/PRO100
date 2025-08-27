@@ -3,28 +3,30 @@ package csc180.damian.swiney.workplace_incident_report_system.model.typeOfReport
 
 import csc180.damian.swiney.workplace_incident_report_system.model.Report;
 import csc180.damian.swiney.workplace_incident_report_system.model.TypeOfReport;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public class Injury extends Report {
-    private String injuryType;
-    private boolean isHospitalized;
+    private SimpleStringProperty injuryType;
+    private SimpleBooleanProperty isHospitalized;
 
-    public Injury(String fileName, int employeeID, String actionTaken, String description, String injuryType, boolean isHospitalized, String status) {
+    public Injury(String fileName, int employeeID, String actionTaken, String description, SimpleStringProperty injuryType, SimpleBooleanProperty isHospitalized, String status) {
         super(fileName, employeeID , actionTaken, description, status);
         setInjuryType(injuryType);
         setHospitalized(isHospitalized);
         setTypeOfReport(TypeOfReport.INJURY);
     }
 
-    public String getInjuryType() {
+    public SimpleStringProperty getInjuryType() {
         return injuryType;
     }
-    public void setInjuryType(String injuryType) {
+    public void setInjuryType(SimpleStringProperty injuryType) {
         this.injuryType = injuryType;
     }
-    public boolean getIsHospitalized() {
+    public SimpleBooleanProperty getIsHospitalized() {
         return isHospitalized;
     }
-    public void setHospitalized(boolean hospitalized) {
+    public void setHospitalized(SimpleBooleanProperty hospitalized) {
         isHospitalized = hospitalized;
     }
 
