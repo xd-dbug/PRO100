@@ -139,7 +139,7 @@ public class AddReportController
                         }else{
                             inHospital = false;
                         }
-                        DataBaseManager.addInjury(Description,Title,IncidentType,ActionTaken,Status,inHospital,IncidentType,employeeID);
+                        reportsPageController.addReportToTable(DataBaseManager.addInjury(Description,Title,IncidentType,ActionTaken,Status,inHospital,IncidentType,employeeID));
                         break;
                     case OTHER:
                     default:

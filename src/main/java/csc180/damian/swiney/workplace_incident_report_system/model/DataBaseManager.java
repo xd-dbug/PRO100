@@ -66,7 +66,8 @@ public class DataBaseManager {
             System.out.println("Unable to add Injury");
         }
 
-        Report injuryReport = new Injury(Title,reportID,ActionTaken,description,InjuryType,Hospitalized,Status);
+
+        Report injuryReport = new Injury(Title,employeeID,ActionTaken,description,InjuryType,Hospitalized,Status);
 
         return injuryReport;
 
@@ -119,29 +120,36 @@ public class DataBaseManager {
 
 
 
-    public static void addToMainTable(String description,String Title,String IncidentType,String ActionTaken,String Status, int EmployeeID) {
+    public static void addToMainTable(String description, String Title, String IncidentType,
+                                      String ActionTaken, String Status, int EmployeeID) {
+        String MainSql = "INSERT INTO MainTable(Title, EmployeeID, Date, IncidentType, Description, ActionTaken, Status) VALUES (?,?,?,?,?,?,?)";
 
-        try {
-            String MainSql = "INSERT INTO MainTable(Title,EmployeeID,DataOccured,IncidentType,Description,ActionTaken,Status) VALUES (?,?,?,?,?)";
-            PreparedStatement stmt = connect().prepareStatement(MainSql, Statement.RETURN_GENERATED_KEYS);
+        try (Connection conn = connect();
+             PreparedStatement stmt = conn.prepareStatement(MainSql, Statement.RETURN_GENERATED_KEYS)) {
+
             stmt.setString(1, Title);
             stmt.setInt(2, EmployeeID);
             stmt.setDate(3, new java.sql.Date(System.currentTimeMillis()));
             stmt.setString(4, IncidentType);
             stmt.setString(5, description);
-            stmt.setString(4, ActionTaken);
-            stmt.setString(5, Status);
+            stmt.setString(6, ActionTaken);
+            stmt.setString(7, Status);
+
             stmt.executeUpdate();
-            ResultSet rs = stmt.getGeneratedKeys();
-            if (rs.next()) {
-                reportID = rs.getInt(1);
-            } else {
-                throw new SQLException("Unable to get ReportID");
+
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    reportID = rs.getInt(1);
+                } else {
+                    throw new SQLException("Unable to get ReportID");
+                }
             }
+
         } catch (SQLException e) {
-            System.out.println("Unable to add To MainTable");
+            System.out.println("Unable to add To MainTable: " + e.getMessage());
         }
     }
+
 
     public Employee addEmployee(String firstname, String lastname, String department) throws SQLException {
         String sql = "INSERT INTO employees VALUES (?,?,?)";
@@ -208,8 +216,21 @@ public class DataBaseManager {
 
 
                 switch(incidentType){
-                    case "INJURY":
+                    case "INJURY": {
+                        // Now fetch the injury-specific details
+                        String injurySql = "SELECT InjuryType, Hospitalized FROM Injury WHERE InjuryID = ?";
+                        try (PreparedStatement injuryStmt = conn.prepareStatement(injurySql)) {
+                            injuryStmt.setInt(1, reportID);
+                            try (ResultSet injuryRs = injuryStmt.executeQuery()) {
+                                if (injuryRs.next()) {
+                                    String injuryType = injuryRs.getString("InjuryType");
+                                    boolean hospitalized = injuryRs.getBoolean("Hospitalized");
+                                    reports.add(new Injury(title, employeeID, actionTaken, description, injuryType, hospitalized, status));
+                                }
+                            }
+                        }
                         break;
+                    }
                     case "NEAR_MISS":
 
                         break;
@@ -223,7 +244,7 @@ public class DataBaseManager {
 
 
 
-                reports.add(new Other("N/A", 0, "N/A", description, "Open"));
+
             }
         }
         catch (SQLException e)
