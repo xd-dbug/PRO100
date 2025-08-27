@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -96,6 +97,15 @@ public class ReportsPageController
 
     @FXML
     public void initialize() throws SQLException {
+        allReportsIdColumn.setCellValueFactory(new PropertyValueFactory<>("reportID"));
+        allReportsTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        allReportsIncidentTypeColumn.setCellValueFactory(new PropertyValueFactory<>("incidentType"));
+        allReportsEmployeeIDColumn.setCellValueFactory(new PropertyValueFactory<>("employeeID"));
+        allReportsDateColumn.setCellValueFactory(new PropertyValueFactory<>("dateOccured"));
+        allReportsDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        allReportsActionTakenColumn.setCellValueFactory(new PropertyValueFactory<>("actionTaken"));
+        allReportsStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+
         loadReports();
         allReportsTable.setItems(reportList);
     }

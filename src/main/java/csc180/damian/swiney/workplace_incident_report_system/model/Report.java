@@ -1,15 +1,16 @@
 package csc180.damian.swiney.workplace_incident_report_system.model;
 
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public abstract class Report {
-    private String fileName;
-    private int employeeID;
+    private SimpleStringProperty fileName;
+    private SimpleIntegerProperty employeeID;
     private TypeOfReport typeOfReport;
-    private String description;
-    private static int id;
-    private String actionTaken;
-    private String status;
+    private SimpleStringProperty description;
+    private SimpleStringProperty actionTaken;
+    private SimpleStringProperty status;
 
 
     public Report(String fileName, int employeeID, String description, String actionTaken, String status) {
@@ -18,26 +19,19 @@ public abstract class Report {
         setDescription(description);
         setActionTaken(actionTaken);
         setStatus(status);
-        id++;
     }
 
-    public void updateStatus(String status){
-        System.out.println("Updating report status to " + status);
-        setStatus(status);
-    }
 
     //region
     public String getFileName() {
-        return fileName;
+        return fileName.get();
     }
-    protected void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
+    protected void setFileName(String fileName) {this.fileName.set(fileName);}
     public int getEmployee() {
-        return employeeID;
+        return employeeID.get();
     }
     protected void setEmployeeID(int employeeID) {
-        this.employeeID = employeeID;
+        this.employeeID.set(employeeID);
     }
     public TypeOfReport getTypeOfReport() {
         return typeOfReport;
@@ -46,36 +40,23 @@ public abstract class Report {
         this.typeOfReport = typeOfReport;
     }
     public String getDescription() {
-        return description;
+        return description.get();
     }
     protected void setDescription(String description) {
-        this.description = description;
-    }
-    public int getId() {
-        return id;
+        this.description.set(description);
     }
     protected void setActionTaken(String actionTaken) {
-        this.actionTaken = actionTaken;
+        this.actionTaken.set(actionTaken);
     }
     public String getActionTaken() {
-        return actionTaken;
+        return actionTaken.get();
     }
     private void setStatus(String status) {
-        this.status = status;
+        this.status.set(status);
     }
     public String getStatus() {
-        return status;
+        return status.get();
     }
-    //endregion
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("ID: ").append(getId()).append("\n");
-        sb.append("File: ").append(getFileName()).append("\n");
-        sb.append("Employee ID: ").append(getEmployee()).append("\n");
-        sb.append("Description: ").append(getDescription()).append("\n");
-        sb.append("Action Taken: ").append(getActionTaken()).append("\n");
-        sb.append("Status: ").append(getStatus()).append("\n");
-        return sb.toString();
-    }
+
 
 }
