@@ -195,17 +195,29 @@ public class DataBaseManager {
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
-            while (rs.next())
-            {
+            while (rs.next()) {
+                int reportID = rs.getInt("ReportID");
+                String description = rs.getString("Description");
                 String incidentType = rs.getString("IncidentType");
+                String actionTaken = rs.getString("ActionTaken");
+                String status = rs.getString("Status");
+                String title = rs.getString("Title");
+                int employeeID = rs.getInt("employeeID");
+
+
                 switch(incidentType){
                     case "INJURY":
-                        
-                        ;
+                        break;
+                    case "NEAR_MISS":
+                        break;
+                    case "PRODUCT_DAMAGE":
+                        break;
+                    case "PROPERTY_DAMAGE":
+                        break;
+
+
                 }
 
-                int id = rs.getInt("ReportID");
-                String description = rs.getString("Description");
 
 
                 reports.add(new Other("N/A", 0, "N/A", description, "Open"));
