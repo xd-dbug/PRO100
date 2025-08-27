@@ -38,15 +38,18 @@ GO
 /* Main incident table */
 CREATE TABLE dbo.MainTable
 (
-    ReportID     INT IDENTITY(100000,1) NOT NULL,
+    ReportID INT IDENTITY(100000,1) NOT NULL,
     Title VARCHAR(25) NOT NULL,
-    FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID)
+    EmployeeID SMALLINT NOT NULL,
     Date DATE NOT NULL,
     IncidentType VARCHAR(20) NOT NULL,
     [Description] VARCHAR(500) NOT NULL,
     ActionTaken VARCHAR (500),
     Status VARCHAR (20),
-    CONSTRAINT PK_Main PRIMARY KEY (ReportID)
+    CONSTRAINT PK_Main PRIMARY KEY (ReportID),
+    CONSTRAINT FK_MainTable_Employee
+        FOREIGN KEY (EmployeeID)
+            REFERENCES dbo.Employees(EmployeeID)
 
     );
 GO
