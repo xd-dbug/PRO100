@@ -99,12 +99,16 @@ public class ReportsPageController
     public void initialize() throws SQLException {
         allReportsIdColumn.setCellValueFactory(new PropertyValueFactory<>("reportID"));
         allReportsTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-        allReportsIncidentTypeColumn.setCellValueFactory(new PropertyValueFactory<>("incidentType"));
+        allReportsIncidentTypeColumn.setCellValueFactory(new PropertyValueFactory<>("typeOfReport"));
         allReportsEmployeeIDColumn.setCellValueFactory(new PropertyValueFactory<>("employeeID"));
-        allReportsDateColumn.setCellValueFactory(new PropertyValueFactory<>("dateOccured"));
+        allReportsDateColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
         allReportsDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         allReportsActionTakenColumn.setCellValueFactory(new PropertyValueFactory<>("actionTaken"));
         allReportsStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        injuriesIdColumn.setCellValueFactory(new PropertyValueFactory<>("reportID"));
+        injuriesTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+
 
         loadReports();
         allReportsTable.setItems(reportList);

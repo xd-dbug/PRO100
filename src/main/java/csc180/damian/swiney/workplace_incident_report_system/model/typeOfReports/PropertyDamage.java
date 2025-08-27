@@ -2,30 +2,21 @@ package csc180.damian.swiney.workplace_incident_report_system.model.typeOfReport
 
 import csc180.damian.swiney.workplace_incident_report_system.model.Report;
 import csc180.damian.swiney.workplace_incident_report_system.model.TypeOfReport;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class PropertyDamage extends Report {
-    private SimpleIntegerProperty propertyDamage;
+import java.time.LocalDate;
 
-    public PropertyDamage(String fileName, int employeeID, String description, String actionTaken, String status, SimpleIntegerProperty propertyDamage) {
-        super(fileName, employeeID, description, actionTaken, status);
-        setPropertyDamage(propertyDamage);
+public class PropertyDamage extends Report {
+    private final SimpleIntegerProperty propertyDamage = new SimpleIntegerProperty();
+
+    public PropertyDamage(int reportID, String fileName, int employeeID, String description,
+                          String actionTaken, int propertyDamage, String status, LocalDate dateOccured) {
+        super(reportID, fileName, employeeID, description, actionTaken, status, dateOccured);
+        this.propertyDamage.set(propertyDamage);
         setTypeOfReport(TypeOfReport.PROPERTY_DAMAGE);
     }
 
-    public SimpleIntegerProperty getPropertyDamage() {
-        return propertyDamage;
-    }
-    public void setPropertyDamage(SimpleIntegerProperty propertyDamage) {
-        this.propertyDamage = propertyDamage;
-    }
-
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Report Type: ").append(getTypeOfReport()).append("\n");
-        sb.append("Property Damage Amount: ").append(getPropertyDamage()).append("$").append("\n");
-        sb.append(super.toString());
-        return sb.toString();
-    }
+    public int getPropertyDamage() { return propertyDamage.get(); }
+    public void setPropertyDamage(int value) { propertyDamage.set(value); }
+    public SimpleIntegerProperty propertyDamageProperty() { return propertyDamage; }
 }

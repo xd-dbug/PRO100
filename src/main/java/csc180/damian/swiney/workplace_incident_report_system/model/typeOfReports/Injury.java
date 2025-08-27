@@ -1,42 +1,32 @@
 package csc180.damian.swiney.workplace_incident_report_system.model.typeOfReports;
 
-
 import csc180.damian.swiney.workplace_incident_report_system.model.Report;
 import csc180.damian.swiney.workplace_incident_report_system.model.TypeOfReport;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class Injury extends Report {
-    private SimpleStringProperty injuryType;
-    private SimpleBooleanProperty isHospitalized;
+import java.time.LocalDate;
 
-    public Injury(String fileName, int employeeID, String actionTaken, String description, SimpleStringProperty injuryType, SimpleBooleanProperty isHospitalized, String status) {
-        super(fileName, employeeID , actionTaken, description, status);
+public class Injury extends Report {
+    private final SimpleStringProperty injuryType = new SimpleStringProperty();
+    private final SimpleBooleanProperty hospitalized = new SimpleBooleanProperty();
+
+    public Injury(int reportID, String fileName, int employeeID, String description, String actionTaken, String injuryType, boolean hospitalized, String status, LocalDate dateOccured) {
+        super(reportID, fileName, employeeID, description, actionTaken, status, dateOccured);
         setInjuryType(injuryType);
-        setHospitalized(isHospitalized);
+        setHospitalized(hospitalized);
         setTypeOfReport(TypeOfReport.INJURY);
     }
 
-    public SimpleStringProperty getInjuryType() {
-        return injuryType;
-    }
-    public void setInjuryType(SimpleStringProperty injuryType) {
-        this.injuryType = injuryType;
-    }
-    public SimpleBooleanProperty getIsHospitalized() {
-        return isHospitalized;
-    }
-    public void setHospitalized(SimpleBooleanProperty hospitalized) {
-        isHospitalized = hospitalized;
-    }
+    // Getters
+    public String getInjuryType() { return injuryType.get(); }
+    public boolean isHospitalized() { return hospitalized.get(); }
 
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Report Type: ").append(getTypeOfReport()).append("\n");
-        sb.append("Injury Type: ").append(getInjuryType()).append("\n");
-        sb.append("Hospitalized: ").append(getIsHospitalized()).append("\n");
-        sb.append(super.toString());
-        return sb.toString();
-    }
+    // Setters
+    public void setInjuryType(String injuryType) { this.injuryType.set(injuryType); }
+    public void setHospitalized(boolean hospitalized) { this.hospitalized.set(hospitalized); }
 
+    // Properties for JavaFX binding
+    public SimpleStringProperty injuryTypeProperty() { return injuryType; }
+    public SimpleBooleanProperty hospitalizedProperty() { return hospitalized; }
 }

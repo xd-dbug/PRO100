@@ -1,9 +1,9 @@
 package csc180.damian.swiney.workplace_incident_report_system.model;
 
 import csc180.damian.swiney.workplace_incident_report_system.model.typeOfReports.Injury;
-import csc180.damian.swiney.workplace_incident_report_system.model.typeOfReports.Other;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,15 +44,12 @@ public class DataBaseManager {
     }
 
 
-    public static void addReport() {
 
 
-    }
-
-    public static Report addInjury(String description,String Title,String IncidentType,String ActionTaken,String Status, boolean Hospitalized, String InjuryType, int employeeID) {
+    public static Report addInjury(String description,String Title,String IncidentType,String ActionTaken,String Status, boolean Hospitalized, String InjuryType, int employeeID, LocalDate dateOccurred) {
         String InjurySql = "INSERT INTO Injury (InjuryID, Hospitalized, InjuryType) VALUES (?,?,?)";
 
-        addToMainTable(description,Title,IncidentType,ActionTaken,Status,employeeID);
+        addToMainTable(description, Title, IncidentType, ActionTaken, Status, employeeID, dateOccurred);
 
         try {
             PreparedStatement injuryStmt = connect().prepareStatement(InjurySql);
@@ -67,15 +64,15 @@ public class DataBaseManager {
         }
 
 
-        Report injuryReport = new Injury(Title,employeeID,ActionTaken,description,InjuryType,Hospitalized,Status);
+        Report injuryReport = new Injury(reportID,Title,employeeID,ActionTaken,description,InjuryType,Hospitalized,Status,dateOccurred);
 
         return injuryReport;
 
     }
 
-    public static void addNearMiss(String description,String Title,String IncidentType,String ActionTaken,String Status, int employeeID){
+    public static void addNearMiss(String description, String Title, String IncidentType, String ActionTaken, String Status, int employeeID, LocalDate dateOccurred){
         String missSql = "INSERT INTO NearMiss (NearMissID, Description) VALUES (?,?)";
-        addToMainTable(description,Title,IncidentType,ActionTaken,Status,employeeID);
+        addToMainTable(description, Title, IncidentType, ActionTaken, Status, employeeID, dateOccurred);
         try{
             PreparedStatement stmt = connect().prepareStatement(missSql);
             stmt.setInt(1, reportID);
@@ -88,9 +85,9 @@ public class DataBaseManager {
 
     }
 
-    public static void addProductDamage(String description,String Title,String IncidentType,String ActionTaken,String Status, int productDamage, int employeeID) {
+    public static void addProductDamage(String description, String Title, String IncidentType, String ActionTaken, String Status, int productDamage, int employeeID, LocalDate dateOccurred) {
         String productSql = "INSERT INTO ProductDamage (ProductDamageID, Description, ProductDamage) VALUES (?,?,?)";
-        addToMainTable(description,Title,IncidentType,ActionTaken,Status,employeeID);
+        addToMainTable(description, Title, IncidentType, ActionTaken, Status, employeeID, dateOccurred);
         try{
             PreparedStatement stmt = connect().prepareStatement(productSql);
             stmt.setInt(1, reportID);
@@ -103,9 +100,9 @@ public class DataBaseManager {
         }
     }
 
-    public static void addPropertyDamage(String description,String Title,String IncidentType,String ActionTaken,String Status, int propertyDamage, int employeeID) {
+    public static void addPropertyDamage(String description,String Title,String IncidentType,String ActionTaken,String Status, int propertyDamage, int employeeID, LocalDate dateOccurred) {
         String propertySql = "INSERT INTO PropertyDamage (PropertyDamageID, Description, PropertyDamage) VALUES (?,?,?)";
-        addToMainTable(description,Title,IncidentType,ActionTaken,Status, employeeID);
+        addToMainTable(description, Title, IncidentType, ActionTaken, Status, employeeID, dateOccurred);
         try{
             PreparedStatement stmt = connect().prepareStatement(propertySql);
             stmt.setInt(1, reportID);
@@ -120,8 +117,7 @@ public class DataBaseManager {
 
 
 
-    public static void addToMainTable(String description, String Title, String IncidentType,
-                                      String ActionTaken, String Status, int EmployeeID) {
+    public static void addToMainTable(String description, String Title, String IncidentType, String ActionTaken, String Status, int EmployeeID, LocalDate dateOccurred) {
         String MainSql = "INSERT INTO MainTable(Title, EmployeeID, Date, IncidentType, Description, ActionTaken, Status) VALUES (?,?,?,?,?,?,?)";
 
         try (Connection conn = connect();
@@ -129,7 +125,7 @@ public class DataBaseManager {
 
             stmt.setString(1, Title);
             stmt.setInt(2, EmployeeID);
-            stmt.setDate(3, new java.sql.Date(System.currentTimeMillis()));
+            stmt.setDate(3, Date.valueOf(dateOccurred));
             stmt.setString(4, IncidentType);
             stmt.setString(5, description);
             stmt.setString(6, ActionTaken);
@@ -213,6 +209,7 @@ public class DataBaseManager {
                 String status = rs.getString("Status");
                 String title = rs.getString("Title");
                 int employeeID = rs.getInt("employeeID");
+                LocalDate dateOccurred = rs.getDate("Date").toLocalDate();
 
 
                 switch(incidentType){
@@ -225,7 +222,7 @@ public class DataBaseManager {
                                 if (injuryRs.next()) {
                                     String injuryType = injuryRs.getString("InjuryType");
                                     boolean hospitalized = injuryRs.getBoolean("Hospitalized");
-                                    reports.add(new Injury(title, employeeID, actionTaken, description, injuryType, hospitalized, status));
+                                    reports.add(new Injury(reportID, title, employeeID, actionTaken, description, injuryType, hospitalized, status, dateOccurred));
                                 }
                             }
                         }

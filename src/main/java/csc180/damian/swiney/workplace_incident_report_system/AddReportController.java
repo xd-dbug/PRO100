@@ -1,7 +1,6 @@
 package csc180.damian.swiney.workplace_incident_report_system;
 
 import csc180.damian.swiney.workplace_incident_report_system.model.DataBaseManager;
-import csc180.damian.swiney.workplace_incident_report_system.model.Employee;
 import csc180.damian.swiney.workplace_incident_report_system.model.TypeOfReport;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -11,6 +10,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.time.LocalDate;
 
 public class AddReportController
 {
@@ -50,6 +51,7 @@ public class AddReportController
     private String ActionTaken;
     private String Status;
     private int employeeID;
+    private LocalDate Date;
 
     @FXML
     private void initialize() {
@@ -109,6 +111,8 @@ public class AddReportController
         Status = statusInputField.getText();
         IncidentType = incidentTypeDropDown.getSelectionModel().getSelectedItem();
         employeeID = Integer.parseInt(employeeInputField.getText());
+        Date = incidentDatePicker.getValue();
+
 
 
         String selected = incidentTypeDropDown.getSelectionModel().getSelectedItem();
@@ -122,15 +126,15 @@ public class AddReportController
                 switch (type)
                 {
                     case NEAR_MISS:
-                        DataBaseManager.addNearMiss(Description, Title, IncidentType, ActionTaken, Status,employeeID);
+                        //DataBaseManager.addNearMiss(Description, Title, IncidentType, ActionTaken, Status,employeeID, Date);
                         break;
                     case PRODUCT_DAMAGE:
                         int damage = Integer.parseInt(productDamageInputField.getText());
-                        DataBaseManager.addProductDamage(Description,Title,IncidentType,ActionTaken,Status,damage,employeeID);
+                       // DataBaseManager.addProductDamage(Description,Title,IncidentType,ActionTaken,Status,damage,employeeID, Date);
                         break;
                     case PROPERTY_DAMAGE:
                         int proDamage = Integer.parseInt(propertyDamageInputField.getText());
-                        DataBaseManager.addPropertyDamage(Description,Title,IncidentType,ActionTaken,Status,proDamage,employeeID);
+                       // DataBaseManager.addPropertyDamage(Description,Title,IncidentType,ActionTaken,Status,proDamage,employeeID);
                         break;
                     case INJURY:
                         Boolean inHospital;
@@ -139,11 +143,11 @@ public class AddReportController
                         }else{
                             inHospital = false;
                         }
-                        reportsPageController.addReportToTable(DataBaseManager.addInjury(Description,Title,IncidentType,ActionTaken,Status,inHospital,IncidentType,employeeID));
+                        reportsPageController.addReportToTable(DataBaseManager.addInjury(Description,Title,IncidentType,ActionTaken,Status,inHospital,IncidentType,employeeID, Date));
                         break;
                     case OTHER:
                     default:
-                        DataBaseManager.addToMainTable(Description,Title,IncidentType,ActionTaken,Status,employeeID);
+                       // DataBaseManager.addToMainTable(Description,Title,IncidentType,ActionTaken,Status,employeeID);
                         break;
                 }
             }

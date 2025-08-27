@@ -3,17 +3,12 @@ package csc180.damian.swiney.workplace_incident_report_system.model.typeOfReport
 import csc180.damian.swiney.workplace_incident_report_system.model.Report;
 import csc180.damian.swiney.workplace_incident_report_system.model.TypeOfReport;
 
+import java.time.LocalDate;
+
 public class NearMiss extends Report {
-    public NearMiss(String fileName, int employeeID, String actionTaken, String description, String status) {
-        super(fileName, employeeID, description, actionTaken, status);
+
+    public NearMiss(int reportID, String fileName, int employeeID, String description, String actionTaken, String status, LocalDate dateOccured) {
+        super(reportID, fileName, employeeID, description, actionTaken, status, dateOccured);
         setTypeOfReport(TypeOfReport.NEAR_MISS);
     }
-
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Report Type: ").append(getTypeOfReport()).append("\n");
-        sb.append(super.toString());
-        return sb.toString();
-    }
-
 }
