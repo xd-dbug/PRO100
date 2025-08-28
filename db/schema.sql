@@ -97,3 +97,13 @@ CREATE TABLE dbo.NearMiss
         REFERENCES dbo.MainTable(ReportID)
 );
 GO
+
+
+CREATE TABLE dbo.Other
+(
+    OtherID INT NOT NULL,
+    CONSTRAINT PK_Other PRIMARY KEY (OtherID),
+    CONSTRAINT FK_Other_Main FOREIGN KEY (OtherID)
+        REFERENCES dbo.MainTable(ReportID)
+);
+GO
