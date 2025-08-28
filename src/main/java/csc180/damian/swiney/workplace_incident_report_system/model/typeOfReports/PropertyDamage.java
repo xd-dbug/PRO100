@@ -10,8 +10,8 @@ public class PropertyDamage extends Report {
     private final SimpleIntegerProperty propertyDamage = new SimpleIntegerProperty();
 
     public PropertyDamage(int reportID, String fileName, int employeeID, String description,
-                          String actionTaken, int propertyDamage, String status, LocalDate dateOccured) {
-        super(reportID, fileName, employeeID, description, actionTaken, status, dateOccured);
+                          String actionTaken, int propertyDamage, String status, LocalDate dateOccurred) {
+        super(reportID, fileName, employeeID, description, actionTaken, status, dateOccurred);
         this.propertyDamage.set(propertyDamage);
         setTypeOfReport(TypeOfReport.PROPERTY_DAMAGE);
     }

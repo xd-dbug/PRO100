@@ -7,8 +7,8 @@ import java.time.LocalDate;
 
 public class NearMiss extends Report {
 
-    public NearMiss(int reportID, String fileName, int employeeID, String description, String actionTaken, String status, LocalDate dateOccured) {
-        super(reportID, fileName, employeeID, description, actionTaken, status, dateOccured);
+    public NearMiss(int reportID, String fileName, int employeeID, String description, String actionTaken, String status, LocalDate dateOccurred) {
+        super(reportID, fileName, employeeID, description, actionTaken, status, dateOccurred);
         setTypeOfReport(TypeOfReport.NEAR_MISS);
     }
 }

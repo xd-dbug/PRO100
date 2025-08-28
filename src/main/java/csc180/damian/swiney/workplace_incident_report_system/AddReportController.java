@@ -126,15 +126,15 @@ public class AddReportController
                 switch (type)
                 {
                     case NEAR_MISS:
-                        //DataBaseManager.addNearMiss(Description, Title, IncidentType, ActionTaken, Status,employeeID, Date);
+                        reportsPageController.addReportToTable(DataBaseManager.addNearMiss(Description, Title, IncidentType, ActionTaken, Status, employeeID, Date));
                         break;
                     case PRODUCT_DAMAGE:
-                        int damage = Integer.parseInt(productDamageInputField.getText());
-                       // DataBaseManager.addProductDamage(Description,Title,IncidentType,ActionTaken,Status,damage,employeeID, Date);
+                        int productDamage = Integer.parseInt(productDamageInputField.getText());
+                        reportsPageController.addReportToTable(DataBaseManager.addProductDamage(Description, Title, IncidentType, ActionTaken, Status, productDamage, employeeID, Date));
                         break;
                     case PROPERTY_DAMAGE:
-                        int proDamage = Integer.parseInt(propertyDamageInputField.getText());
-                       // DataBaseManager.addPropertyDamage(Description,Title,IncidentType,ActionTaken,Status,proDamage,employeeID);
+                        int propertyDamage = Integer.parseInt(propertyDamageInputField.getText());
+                        reportsPageController.addReportToTable(DataBaseManager.addPropertyDamage(Description, Title, IncidentType, ActionTaken, Status, propertyDamage, employeeID, Date));
                         break;
                     case INJURY:
                         Boolean inHospital;
@@ -146,8 +146,8 @@ public class AddReportController
                         reportsPageController.addReportToTable(DataBaseManager.addInjury(Description,Title,IncidentType,ActionTaken,Status,inHospital,IncidentType,employeeID, Date));
                         break;
                     case OTHER:
+                        reportsPageController.addReportToTable(DataBaseManager.addOther(Description, Title, IncidentType, ActionTaken, Status, employeeID, Date));
                     default:
-                       // DataBaseManager.addToMainTable(Description,Title,IncidentType,ActionTaken,Status,employeeID);
                         break;
                 }
             }

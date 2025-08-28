@@ -11,8 +11,8 @@ public class Injury extends Report {
     private final SimpleStringProperty injuryType = new SimpleStringProperty();
     private final SimpleBooleanProperty hospitalized = new SimpleBooleanProperty();
 
-    public Injury(int reportID, String fileName, int employeeID, String description, String actionTaken, String injuryType, boolean hospitalized, String status, LocalDate dateOccured) {
-        super(reportID, fileName, employeeID, description, actionTaken, status, dateOccured);
+    public Injury(int reportID, String fileName, int employeeID, String description, String actionTaken, String injuryType, boolean hospitalized, String status, LocalDate dateOccurred) {
+        super(reportID, fileName, employeeID, description, actionTaken, status, dateOccurred);
         setInjuryType(injuryType);
         setHospitalized(hospitalized);
         setTypeOfReport(TypeOfReport.INJURY);

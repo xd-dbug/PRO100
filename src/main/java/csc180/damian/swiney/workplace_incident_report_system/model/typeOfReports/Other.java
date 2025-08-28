@@ -7,8 +7,8 @@ import java.time.LocalDate;
 
 public class Other extends Report {
 
-    public Other(int reportID, String fileName, int employeeID, String description, String actionTaken, String status, LocalDate dateOccured) {
-        super(reportID, fileName, employeeID, description, actionTaken, status, dateOccured);
+    public Other(int reportID, String fileName, int employeeID, String description, String actionTaken, String status, LocalDate dateOccurred) {
+        super(reportID, fileName, employeeID, description, actionTaken, status, dateOccurred);
         setTypeOfReport(TypeOfReport.OTHER);
     }
 }

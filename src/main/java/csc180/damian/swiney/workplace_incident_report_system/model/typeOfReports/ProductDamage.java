@@ -9,9 +9,8 @@ import java.time.LocalDate;
 public class ProductDamage extends Report {
     private final SimpleIntegerProperty productDamage = new SimpleIntegerProperty();
 
-    public ProductDamage(int reportID, String fileName, int employeeID, String description,
-                         String actionTaken, int productDamage, String status, LocalDate dateOccured) {
-        super(reportID, fileName, employeeID, description, actionTaken, status, dateOccured);
+    public ProductDamage(int reportID, String fileName, int employeeID, String description, String actionTaken, int productDamage, String status, LocalDate dateOccurred) {
+        super(reportID, fileName, employeeID, description, actionTaken, status, dateOccurred);
         this.productDamage.set(productDamage);
         setTypeOfReport(TypeOfReport.PRODUCT_DAMAGE);
     }

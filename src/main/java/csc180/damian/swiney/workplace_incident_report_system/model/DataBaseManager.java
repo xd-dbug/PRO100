@@ -1,6 +1,6 @@
 package csc180.damian.swiney.workplace_incident_report_system.model;
 
-import csc180.damian.swiney.workplace_incident_report_system.model.typeOfReports.Injury;
+import csc180.damian.swiney.workplace_incident_report_system.model.typeOfReports.*;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -70,50 +70,74 @@ public class DataBaseManager {
 
     }
 
-    public static void addNearMiss(String description, String Title, String IncidentType, String ActionTaken, String Status, int employeeID, LocalDate dateOccurred){
-        String missSql = "INSERT INTO NearMiss (NearMissID, Description) VALUES (?,?)";
+    public static Report addNearMiss(String description, String Title, String IncidentType, String ActionTaken, String Status, int employeeID, LocalDate dateOccurred){
+        String missSql = "INSERT INTO NearMiss (MissID) VALUES (?)";
         addToMainTable(description, Title, IncidentType, ActionTaken, Status, employeeID, dateOccurred);
         try{
             PreparedStatement stmt = connect().prepareStatement(missSql);
             stmt.setInt(1, reportID);
-            stmt.setString(2, description);
             stmt.executeUpdate();
 
         }catch(SQLException e){
-            System.out.println("Unable to add NearMiss");
+            e.printStackTrace();
         }
+
+        Report nearMissReport = new NearMiss(reportID,Title,employeeID,ActionTaken,description,Status,dateOccurred);
+
+        return nearMissReport;
 
     }
 
-    public static void addProductDamage(String description, String Title, String IncidentType, String ActionTaken, String Status, int productDamage, int employeeID, LocalDate dateOccurred) {
-        String productSql = "INSERT INTO ProductDamage (ProductDamageID, Description, ProductDamage) VALUES (?,?,?)";
+    public static Report addProductDamage(String description, String Title, String IncidentType, String ActionTaken, String Status, int productDamage, int employeeID, LocalDate dateOccurred) {
+        String productSql = "INSERT INTO ProductDamage (ProductID, ProductDamage) VALUES (?,?)";
         addToMainTable(description, Title, IncidentType, ActionTaken, Status, employeeID, dateOccurred);
         try{
             PreparedStatement stmt = connect().prepareStatement(productSql);
             stmt.setInt(1, reportID);
-            stmt.setString(2, description);
-            stmt.setInt(3, productDamage);
+            stmt.setInt(2, productDamage);
             stmt.executeUpdate();
 
         }catch (SQLException e){
             System.out.println("Unable to add ProductDamage");
         }
+
+        Report productReport = new ProductDamage(reportID,Title,employeeID, description, ActionTaken, productDamage, Status,dateOccurred);
+        return productReport;
     }
 
-    public static void addPropertyDamage(String description,String Title,String IncidentType,String ActionTaken,String Status, int propertyDamage, int employeeID, LocalDate dateOccurred) {
-        String propertySql = "INSERT INTO PropertyDamage (PropertyDamageID, Description, PropertyDamage) VALUES (?,?,?)";
+    public static Report addPropertyDamage(String description,String Title,String IncidentType,String ActionTaken,String Status, int propertyDamage, int employeeID, LocalDate dateOccurred) {
+        String propertySql = "INSERT INTO PropertyDamage (PropertyID, PropertyDamage) VALUES (?,?)";
         addToMainTable(description, Title, IncidentType, ActionTaken, Status, employeeID, dateOccurred);
         try{
             PreparedStatement stmt = connect().prepareStatement(propertySql);
             stmt.setInt(1, reportID);
-            stmt.setString(2, description);
-            stmt.setInt(3, propertyDamage);
+            stmt.setInt(2, propertyDamage);
             stmt.executeUpdate();
 
         }catch(SQLException e){
             System.out.println("Unable to add PropertyDamage");
         }
+        Report propertyReport = new PropertyDamage(reportID,Title,employeeID, description, ActionTaken, propertyDamage, Status,dateOccurred);
+        return propertyReport;
     }
+
+    public static Report addOther(String description, String Title, String IncidentType, String ActionTaken, String Status, int employeeID, LocalDate dateOccurred) {
+        String missSql = "INSERT INTO Other (OtherID) VALUES (?)";
+        addToMainTable(description, Title, IncidentType, ActionTaken, Status, employeeID, dateOccurred);
+        try {
+            PreparedStatement stmt = connect().prepareStatement(missSql);
+            stmt.setInt(1, reportID);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Unable to add Other");
+        }
+
+        Report otherReport = new Other(reportID, Title, employeeID, description, ActionTaken, Status, dateOccurred);
+
+        return otherReport;
+    }
+
 
 
 
@@ -214,7 +238,6 @@ public class DataBaseManager {
 
                 switch(incidentType){
                     case "INJURY": {
-                        // Now fetch the injury-specific details
                         String injurySql = "SELECT InjuryType, Hospitalized FROM Injury WHERE InjuryID = ?";
                         try (PreparedStatement injuryStmt = conn.prepareStatement(injurySql)) {
                             injuryStmt.setInt(1, reportID);
@@ -229,11 +252,51 @@ public class DataBaseManager {
                         break;
                     }
                     case "NEAR_MISS":
+                        String nearMissSQL = "SELECT * from NearMiss WHERE MissID = ?";
+                        try (PreparedStatement nearMissStmt = conn.prepareStatement(nearMissSQL)) {
+                            nearMissStmt.setInt(1, reportID);
+                            try (ResultSet nearMissRs = nearMissStmt.executeQuery()) {
+                                if (nearMissRs.next()) {
+                                    reports.add(new NearMiss(reportID, title, employeeID, actionTaken, description, status, dateOccurred));
+                                }
+                            }
+                        }
 
                         break;
                     case "PRODUCT_DAMAGE":
+                        String productDamageSQL = "SELECT * FROM ProductDamage WHERE ProductID = ?";
+                        try (PreparedStatement productDamageStmt = conn.prepareStatement(productDamageSQL)) {
+                            productDamageStmt.setInt(1, reportID);
+                            try (ResultSet productDamageRs = productDamageStmt.executeQuery()) {
+                                if (productDamageRs.next()) {
+                                    int productDamage = productDamageRs.getInt("ProductDamage");
+                                    reports.add(new ProductDamage(reportID, title,employeeID,description, actionTaken,productDamage, status, dateOccurred));
+                                }
+                            }
+                        }
                         break;
                     case "PROPERTY_DAMAGE":
+                        String propertyDamageSQL = "SELECT * FROM PropertyDamage WHERE PropertyID = ?";
+                        try (PreparedStatement propertyDamageStmt = conn.prepareStatement(propertyDamageSQL)) {
+                            propertyDamageStmt.setInt(1, reportID);
+                            try (ResultSet propertyDamageRs = propertyDamageStmt.executeQuery()) {
+                                if (propertyDamageRs.next()) {
+                                    int propertyDamage = propertyDamageRs.getInt("PropertyDamage");
+                                    reports.add(new PropertyDamage(reportID, title, employeeID, description, actionTaken,propertyDamage, status, dateOccurred));
+                                }
+                            }
+                        }
+                        break;
+                    case "OTHER":
+                        String otherSQL = "SELECT * FROM Other WHERE OtherID = ?";
+                        try (PreparedStatement otherStmt = conn.prepareStatement(otherSQL)) {
+                            otherStmt.setInt(1, reportID);
+                            try (ResultSet otherRs = otherStmt.executeQuery()) {
+                                if (otherRs.next()) {
+                                    reports.add(new Other(reportID,title,employeeID,description,actionTaken,status,dateOccurred));
+                                }
+                            }
+                        }
                         break;
 
 
@@ -250,6 +313,7 @@ public class DataBaseManager {
         }
         return reports;
     }
+
 
     public static void deleteEmployee(int employeeID) throws SQLException {
         String sql = "DELETE FROM employees WHERE EmployeeID = ?";
