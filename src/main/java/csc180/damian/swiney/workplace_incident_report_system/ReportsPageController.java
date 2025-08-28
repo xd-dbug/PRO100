@@ -92,6 +92,11 @@ public class ReportsPageController
 
 
     ObservableList<Report> reportList = FXCollections.observableArrayList(DataBaseManager.getAllReports());
+    ObservableList<Injury> injuryList = FXCollections.observableArrayList();
+    ObservableList<NearMiss> nearMissList = FXCollections.observableArrayList();
+    ObservableList<ProductDamage> productDamageList = FXCollections.observableArrayList();
+    ObservableList<PropertyDamage> propertyDamageList = FXCollections.observableArrayList();
+    ObservableList<Other> otherList = FXCollections.observableArrayList();
     DataBaseManager db = new DataBaseManager();
 
 
@@ -108,10 +113,60 @@ public class ReportsPageController
 
         injuriesIdColumn.setCellValueFactory(new PropertyValueFactory<>("reportID"));
         injuriesTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        injuriesIncidentTypeColumn.setCellValueFactory(new PropertyValueFactory<>("typeOfReport"));
+        injuriesEmployeeIDColumn.setCellValueFactory(new PropertyValueFactory<>("employeeID"));
+        injuriesDateColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        injuriesInjuryTypeColumn.setCellValueFactory(new PropertyValueFactory<>("injuryType"));
+        injuriesHospitalizedColumn.setCellValueFactory(new PropertyValueFactory<>("hospitalized"));
+        injuriesDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        injuriesActionTakenColumn.setCellValueFactory(new PropertyValueFactory<>("actionTaken"));
+        injuriesStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
+        nearMissesIdColumn.setCellValueFactory(new PropertyValueFactory<>("reportID"));
+        nearMissesTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        nearMissesIncidentTypeColumn.setCellValueFactory(new PropertyValueFactory<>("typeOfReport"));
+        nearMissesEmployeeIDColumn.setCellValueFactory(new PropertyValueFactory<>("employeeID"));
+        nearMissesDateColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        nearMissesDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        nearMissesActionTakenColumn.setCellValueFactory(new PropertyValueFactory<>("actionTaken"));
+        nearMissesStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        productDamageIdColumn.setCellValueFactory(new PropertyValueFactory<>("reportID"));
+        productDamageTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        productDamageIncidentTypeColumn.setCellValueFactory(new PropertyValueFactory<>("typeOfReport"));
+        productDamageEmployeeIDColumn.setCellValueFactory(new PropertyValueFactory<>("employeeID"));
+        productDamageDateColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        productDamageProdDamageColumn.setCellValueFactory(new PropertyValueFactory<>("ProductDamage"));
+        productDamageDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        productDamageActionTakenColumn.setCellValueFactory(new PropertyValueFactory<>("actionTaken"));
+        productDamageStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        propertyDamageIdColumn.setCellValueFactory(new PropertyValueFactory<>("reportID"));
+        propertyDamageTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        propertyDamageIncidentTypeColumn.setCellValueFactory(new PropertyValueFactory<>("typeOfReport"));
+        propertyDamageEmployeeIDColumn.setCellValueFactory(new PropertyValueFactory<>("employeeID"));
+        propertyDamageDateColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        propertyDamagePropDamageColumn.setCellValueFactory(new PropertyValueFactory<>("PropertyDamage"));
+        propertyDamageDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        propertyDamageActionTakenColumn.setCellValueFactory(new PropertyValueFactory<>("actionTaken"));
+        propertyDamageStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        otherIdColumn.setCellValueFactory(new PropertyValueFactory<>("reportID"));
+        otherTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        otherIncidentTypeColumn.setCellValueFactory(new PropertyValueFactory<>("typeOfReport"));
+        otherEmployeeIDColumn.setCellValueFactory(new PropertyValueFactory<>("employeeID"));
+        otherDateColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        otherDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        otherActionTakenColumn.setCellValueFactory(new PropertyValueFactory<>("actionTaken"));
+        otherStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         loadReports();
         allReportsTable.setItems(reportList);
+        injuriesTable.setItems(injuryList);
+        nearMissesTable.setItems(nearMissList);
+        productDamageTable.setItems(productDamageList);
+        propertyDamageTable.setItems(propertyDamageList);
+        otherTable.setItems(otherList);
     }
 
 
@@ -120,6 +175,26 @@ public class ReportsPageController
     {
         reportList.clear();
         reportList.addAll(DataBaseManager.getAllReports());
+
+        injuryList.clear();
+        nearMissList.clear();
+        productDamageList.clear();
+        propertyDamageList.clear();
+        otherList.clear();
+
+        for (Report report : reportList) {
+            if (report instanceof Injury) {
+                injuryList.add((Injury) report);
+            } else if (report instanceof NearMiss) {
+                nearMissList.add((NearMiss) report);
+            } else if (report instanceof ProductDamage) {
+                productDamageList.add((ProductDamage) report);
+            } else if (report instanceof PropertyDamage) {
+                propertyDamageList.add((PropertyDamage) report);
+            } else if (report instanceof Other) {
+                otherList.add((Other) report);
+            }
+        }
     }
 
     public void addReportToTable(Report report){
