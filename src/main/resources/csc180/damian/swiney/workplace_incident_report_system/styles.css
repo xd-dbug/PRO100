@@ -22,6 +22,7 @@
 
 .pane {
     -fx-padding: 40px;
+    -fx-background-color: white;
 }
 
 .addItemPane {
@@ -35,8 +36,8 @@
     -fx-border-radius: 20px;
     -fx-background-color: #5490ff;
     -fx-text-fill: white;
-    -fx-min-width: 55px;
-    -fx-min-height: 40px;
+    -fx-pref-width: 60px;
+    -fx-pref-height: 60px;
 
 }
 
@@ -67,3 +68,34 @@
     -fx-background-color: white;
     -fx-padding: 15;
 }
+
+.tab-pane {
+    -fx-background-color: white;
+}
+
+.tab-pane .tab-header-area {
+    -fx-pref-height: 40;
+}
+
+.tab-pane .tab-header-background {
+    -fx-background-color: white;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #5490ff;
+    -fx-pref-width: 152;
+    -fx-pref-height: 30;
+    -fx-text-fill: #dfdfdf;;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #427ce5;
+}
+
+.tab-pane .tab-label {
+    -fx-text-fill: white;
+    -fx-font-size: 15;
+    -fx-pref-height: 30;
+}
+
+
