@@ -107,3 +107,5 @@ CREATE TABLE dbo.Other
         REFERENCES dbo.MainTable(ReportID)
 );
 GO
+
+
