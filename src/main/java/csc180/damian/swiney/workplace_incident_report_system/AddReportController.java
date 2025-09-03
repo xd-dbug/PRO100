@@ -110,51 +110,49 @@ public class AddReportController
         employeeID = Integer.parseInt(employeeInputField.getText());
         Date = incidentDatePicker.getValue();
 
+        if(checkValidState()) {
+
+            String selected = incidentTypeDropDown.getSelectionModel().getSelectedItem();
 
 
-        String selected = incidentTypeDropDown.getSelectionModel().getSelectedItem();
-
-
-        try
-        {
-            if (selected != null)
-            {
-                TypeOfReport type = TypeOfReport.valueOf(selected);
-                switch (type)
-                {
-                    case NEAR_MISS:
-                        reportsPageController.addReportToTable(DataBaseManager.addNearMiss(Description, Title, IncidentType, ActionTaken, Status, employeeID, Date));
-                        break;
-                    case PRODUCT_DAMAGE:
-                        int productDamage = Integer.parseInt(productDamageInputField.getText());
-                        reportsPageController.addReportToTable(DataBaseManager.addProductDamage(Description, Title, IncidentType, ActionTaken, Status, productDamage, employeeID, Date));
-                        break;
-                    case PROPERTY_DAMAGE:
-                        int propertyDamage = Integer.parseInt(propertyDamageInputField.getText());
-                        reportsPageController.addReportToTable(DataBaseManager.addPropertyDamage(Description, Title, IncidentType, ActionTaken, Status, propertyDamage, employeeID, Date));
-                        break;
-                    case INJURY:
-                        Boolean inHospital;
-                        if(hospitalizedCheckbox.isSelected()){
-                            inHospital = true;
-                        }else{
-                            inHospital = false;
-                        }
-                        reportsPageController.addReportToTable(DataBaseManager.addInjury(Description,Title,IncidentType,ActionTaken,Status,inHospital,IncidentType,employeeID, Date));
-                        break;
-                    case OTHER:
-                        reportsPageController.addReportToTable(DataBaseManager.addOther(Description, Title, IncidentType, ActionTaken, Status, employeeID, Date));
-                    default:
-                        break;
+            try {
+                if (selected != null) {
+                    TypeOfReport type = TypeOfReport.valueOf(selected);
+                    switch (type) {
+                        case NEAR_MISS:
+                            reportsPageController.addReportToTable(DataBaseManager.addNearMiss(Description, Title, IncidentType, ActionTaken, Status, employeeID, Date));
+                            break;
+                        case PRODUCT_DAMAGE:
+                            int productDamage = Integer.parseInt(productDamageInputField.getText());
+                            reportsPageController.addReportToTable(DataBaseManager.addProductDamage(Description, Title, IncidentType, ActionTaken, Status, productDamage, employeeID, Date));
+                            break;
+                        case PROPERTY_DAMAGE:
+                            int propertyDamage = Integer.parseInt(propertyDamageInputField.getText());
+                            reportsPageController.addReportToTable(DataBaseManager.addPropertyDamage(Description, Title, IncidentType, ActionTaken, Status, propertyDamage, employeeID, Date));
+                            break;
+                        case INJURY:
+                            Boolean inHospital;
+                            if (hospitalizedCheckbox.isSelected()) {
+                                inHospital = true;
+                            } else {
+                                inHospital = false;
+                            }
+                            reportsPageController.addReportToTable(DataBaseManager.addInjury(Description, Title, IncidentType, ActionTaken, Status, inHospital, IncidentType, employeeID, Date));
+                            break;
+                        case OTHER:
+                            reportsPageController.addReportToTable(DataBaseManager.addOther(Description, Title, IncidentType, ActionTaken, Status, employeeID, Date));
+                        default:
+                            break;
+                    }
                 }
+            } catch (Exception e) {
+                System.out.println("Unable to add report: " + e.getMessage());
             }
-        }
-        catch (Exception e)
-        {
-            System.out.println("Unable to add report: " + e.getMessage());
-        }
 
-        close();
+            close();
+        }else{
+            
+        }
     }
 
     @FXML
@@ -169,4 +167,21 @@ public class AddReportController
         Stage stage = (Stage) descriptionInputField.getScene().getWindow();
         stage.close();
     }
+
+    public Boolean checkValidState(){
+
+        if(Description.isEmpty() || Title.isEmpty()  || IncidentType.isEmpty() || ActionTaken.isEmpty() || Status.isEmpty()) {
+            return false;
+        } else if (IncidentType.equals("INJURY") && injuryTypeInputField.getText().isEmpty() || !hospitalizedCheckbox.isSelected()) {
+            return false;
+        } else if (IncidentType.equals("PRODUCT_DAMAGE") && productDamageInputField.getText().isEmpty()) {
+            return false;
+        } else if (IncidentType.equals("PROPERTY_DAMAGE") && propertyDamageInputField.getText().isEmpty()) {
+            return false;
+        }
+
+        return true;
+
+    }
+
 }
