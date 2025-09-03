@@ -151,7 +151,7 @@ public class AddReportController
 
             close();
         }else{
-            
+            showEmptyFieldsAlert();
         }
     }
 
