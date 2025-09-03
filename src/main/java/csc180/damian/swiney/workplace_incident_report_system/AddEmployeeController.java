@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
@@ -41,11 +42,17 @@ public class AddEmployeeController {
         firstName=firstNameInputField.getText().strip();
         lastName=lastNameInputField.getText().strip();
         department=departmentInputField.getText().strip();
-        Employee newEmployee = dataBaseManager.addEmployee(firstName,lastName,department);
-        if (newEmployee != null && employeesPageController != null) {
-            employeesPageController.addEmployeeToTable(newEmployee);
+
+        if (firstName.isEmpty() || lastName.isEmpty() || department.isEmpty()) {
+            showEmptyFieldsAlert();
+        } else {
+            Employee newEmployee = dataBaseManager.addEmployee(firstName,lastName,department);
+            if (newEmployee != null && employeesPageController != null) {
+                employeesPageController.addEmployeeToTable(newEmployee);
+            }
+            close();
         }
-        close();
+
     }
 
     @FXML
@@ -56,14 +63,15 @@ public class AddEmployeeController {
         close();
     }
 
-    public String getFirstName() {
-        return firstName;
+
+    private void showEmptyFieldsAlert() {
+        Alert alert  = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Submission Error");
+        alert.setHeaderText("Empty Fields Detected");
+        alert.setContentText("Please fill out all the fields");
+        alert.showAndWait();
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-    public String getDepartment() { return department; }
 
     private void close(){
         Stage stage = (Stage) lastNameInputField.getScene().getWindow();
