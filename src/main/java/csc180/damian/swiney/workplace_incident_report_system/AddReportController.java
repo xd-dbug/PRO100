@@ -157,6 +157,17 @@ public class AddReportController
         close();
     }
 
+
+
+
+    private void showEmptyFieldsAlert() {
+        Alert alert  = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Submission Error");
+        alert.setHeaderText("Empty Fields Detected");
+        alert.setContentText("Please fill out all the fields");
+        alert.showAndWait();
+    }
+
     @FXML
     private void onCancel()
     {
