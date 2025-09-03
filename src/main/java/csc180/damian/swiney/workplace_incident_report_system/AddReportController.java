@@ -102,12 +102,12 @@ public class AddReportController
     @FXML
     private void onOk()
     {
-        Description = descriptionInputField.getText();
-        Title = titleInputField.getText();
-        ActionTaken = actionTakenInputField.getText();
-        Status = statusInputField.getText();
+        Description = descriptionInputField.getText().strip();
+        Title = titleInputField.getText().strip();
+        ActionTaken = actionTakenInputField.getText().strip();
+        Status = statusInputField.getText().strip();
         IncidentType = incidentTypeDropDown.getSelectionModel().getSelectedItem();
-        employeeID = Integer.parseInt(employeeInputField.getText());
+        employeeID = Integer.parseInt(employeeInputField.getText().strip());
         Date = incidentDatePicker.getValue();
 
         if(checkValidState()) {
@@ -183,7 +183,7 @@ public class AddReportController
 
         if(Description.isEmpty() || Title.isEmpty()  || IncidentType.isEmpty() || ActionTaken.isEmpty() || Status.isEmpty()) {
             return false;
-        } else if (IncidentType.equals("INJURY") && injuryTypeInputField.getText().isEmpty() || !hospitalizedCheckbox.isSelected()) {
+        } else if (IncidentType.equals("INJURY") && (injuryTypeInputField.getText().isEmpty() || hospitalizedCheckbox == null )) {
             return false;
         } else if (IncidentType.equals("PRODUCT_DAMAGE") && productDamageInputField.getText().isEmpty()) {
             return false;
