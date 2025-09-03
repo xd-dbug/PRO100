@@ -61,10 +61,10 @@
 
 
                 <Label styleClass="addReportLabel" text="Incident Description:" />
-                <TextField styleClass="addReportTextField" fx:id="descriptionInputField" promptText="Type here" />
+                <TextArea styleClass="addReportTextArea" fx:id="descriptionInputField" promptText="Type here" />
 
                 <Label styleClass="addReportLabel" text="Action Taken:" />
-                <TextField styleClass="addReportTextField" fx:id="actionTakenInputField" promptText="Type here" />
+                <TextArea styleClass="addReportTextArea" fx:id="actionTakenInputField" promptText="Type here" />
 
                 <Label styleClass="addReportLabel" text="Incident Status:" />
                 <TextField styleClass="addReportTextField" fx:id="statusInputField" promptText="Type here" />

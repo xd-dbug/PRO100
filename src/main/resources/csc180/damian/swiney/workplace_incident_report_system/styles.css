@@ -20,6 +20,10 @@
 
 }
 
+.navigationBar Button:hover {
+    -fx-background-color: #427ce5;
+}
+
 .pane {
     -fx-padding: 40px;
     -fx-background-color: white;
@@ -41,6 +45,11 @@
 
 }
 
+.addItemButton:hover {
+    -fx-background-color: #427ce5;
+}
+
+
 .pageTitleLabel {
     -fx-font-size: 40px;
     -fx-font-weight: bold;
@@ -52,22 +61,32 @@
     -fx-background-color: white;
 }
 
-.addReportTextField {
 
-}
-
-.addReportLabel {
-    -fx-padding: 25 5 0 0;
+.addReportPane {
+    -fx-background-color: white;
+    -fx-padding: 15;
+    -fx-spacing: 15;
 }
 
 .scrollPane {
     -fx-background-color: white;
 }
 
-.addReportPane {
-    -fx-background-color: white;
-    -fx-padding: 15;
+.addReportLabel {
+    -fx-padding: 25 5 0 0;
 }
+
+.addReportTextField {
+
+}
+
+.addReportTextArea {
+    -fx-wrap-text: true;
+    -fx-min-height: 100;
+
+}
+
+
 
 .tab-pane {
     -fx-background-color: white;
@@ -86,6 +105,10 @@
     -fx-pref-width: 152;
     -fx-pref-height: 30;
     -fx-text-fill: #dfdfdf;;
+}
+
+.tab-pane .tab:hover {
+    -fx-background-color: #427ce5;
 }
 
 .tab-pane .tab:selected {

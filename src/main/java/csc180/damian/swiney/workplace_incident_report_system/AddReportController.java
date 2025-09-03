@@ -4,10 +4,7 @@ import csc180.damian.swiney.workplace_incident_report_system.model.DataBaseManag
 import csc180.damian.swiney.workplace_incident_report_system.model.TypeOfReport;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -32,8 +29,8 @@ public class AddReportController
     @FXML public TextField propertyDamageInputField;
 
 
-    @FXML private TextField descriptionInputField;
-    @FXML public TextField actionTakenInputField;
+    @FXML private TextArea descriptionInputField;
+    @FXML public TextArea actionTakenInputField;
     @FXML public TextField statusInputField;
 
 
