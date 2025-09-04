@@ -1,5 +1,6 @@
 package csc180.damian.swiney.workplace_incident_report_system;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import csc180.damian.swiney.workplace_incident_report_system.model.DataBaseManager;
 import csc180.damian.swiney.workplace_incident_report_system.model.Employee;
 import javafx.collections.FXCollections;
@@ -11,10 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -133,7 +131,18 @@ public class EmployeesPageController {
         } catch (NumberFormatException e) {
             System.out.println("Invalid Employee ID. Must be a number.");
         }catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            deleteErrorAlert();
         }
     }
+
+    private void deleteErrorAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Employee Deletion Error");
+        alert.setHeaderText("Could not delete employee. Please try again.");
+        alert.setContentText("Ensure employee is not tied to an existing report.");
+        alert.showAndWait();
+    }
+
+
 }

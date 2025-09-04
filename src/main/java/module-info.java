@@ -7,6 +7,7 @@ module csc180.damian.swiney.workplace_incident_report_system {
 
     requires java.desktop;
     requires java.sql;
+    requires com.microsoft.sqlserver.jdbc;
 
 
     opens csc180.damian.swiney.workplace_incident_report_system to javafx.fxml;

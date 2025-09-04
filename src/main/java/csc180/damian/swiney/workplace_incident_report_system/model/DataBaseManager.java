@@ -1,5 +1,6 @@
 package csc180.damian.swiney.workplace_incident_report_system.model;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import csc180.damian.swiney.workplace_incident_report_system.model.typeOfReports.*;
 
 import java.sql.*;

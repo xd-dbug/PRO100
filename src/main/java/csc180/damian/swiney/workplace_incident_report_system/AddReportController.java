@@ -102,22 +102,22 @@ public class AddReportController
     @FXML
     private void onOk()
     {
-        Description = descriptionInputField.getText().strip();
-        Title = titleInputField.getText().strip();
-        ActionTaken = actionTakenInputField.getText().strip();
-        Status = statusInputField.getText().strip();
-        IncidentType = incidentTypeDropDown.getSelectionModel().getSelectedItem();
-        employeeID = Integer.parseInt(employeeInputField.getText().strip());
-        Date = incidentDatePicker.getValue();
+
 
         if(checkValidState()) {
+            Description = descriptionInputField.getText().strip();
+            Title = titleInputField.getText().strip();
+            ActionTaken = actionTakenInputField.getText().strip();
+            Status = statusInputField.getText().strip();
+            IncidentType = incidentTypeDropDown.getSelectionModel().getSelectedItem();
+            employeeID = Integer.parseInt(employeeInputField.getText().strip());
+            Date = incidentDatePicker.getValue();
 
-            String selected = incidentTypeDropDown.getSelectionModel().getSelectedItem();
 
 
             try {
-                if (selected != null) {
-                    TypeOfReport type = TypeOfReport.valueOf(selected);
+                if (IncidentType != null) {
+                    TypeOfReport type = TypeOfReport.valueOf(IncidentType);
                     switch (type) {
                         case NEAR_MISS:
                             reportsPageController.addReportToTable(DataBaseManager.addNearMiss(Description, Title, IncidentType, ActionTaken, Status, employeeID, Date));
@@ -181,13 +181,19 @@ public class AddReportController
 
     public Boolean checkValidState(){
 
-        if(Description.isEmpty() || Title.isEmpty()  || IncidentType.isEmpty() || ActionTaken.isEmpty() || Status.isEmpty()) {
+        if(titleInputField.getText().isBlank()
+                || employeeInputField.getText().isBlank()
+                || incidentDatePicker.getValue() == null
+                || incidentTypeDropDown.getSelectionModel().getSelectedItem() == null
+                || descriptionInputField.getText().isBlank()
+                || actionTakenInputField.getText().isBlank()
+                || statusInputField.getText().isBlank()) {
             return false;
-        } else if (IncidentType.equals("INJURY") && (injuryTypeInputField.getText().isEmpty() || hospitalizedCheckbox == null )) {
+        } else if (incidentTypeDropDown.getSelectionModel().getSelectedItem().equals("INJURY") && (injuryTypeInputField.getText().isEmpty() || hospitalizedCheckbox == null )) {
             return false;
-        } else if (IncidentType.equals("PRODUCT_DAMAGE") && productDamageInputField.getText().isEmpty()) {
+        } else if (incidentTypeDropDown.getSelectionModel().getSelectedItem().equals("PRODUCT_DAMAGE") && productDamageInputField.getText().isEmpty()) {
             return false;
-        } else if (IncidentType.equals("PROPERTY_DAMAGE") && propertyDamageInputField.getText().isEmpty()) {
+        } else if (incidentTypeDropDown.getSelectionModel().getSelectedItem().equals("PROPERTY_DAMAGE") && propertyDamageInputField.getText().isEmpty()) {
             return false;
         }
 
